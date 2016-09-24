@@ -17,6 +17,7 @@ var config = {
 	js: {
 		src: [
 			'./web/src/js/app.js',
+			'./web/src/js/services/**',
 			'./web/src/js/initializers/**',
 			'./web/src/js/components/**',
 			'./web/src/js/pages/**',

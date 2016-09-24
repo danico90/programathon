@@ -39,6 +39,7 @@ $this->title = 'Login';
             ['prompt'=>'']    // options
         )
         ?>
+
         <?= $form->field($model, 'username')->textInput() ?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>
@@ -48,11 +49,11 @@ $this->title = 'Login';
         ]) ?>
         
         <div class="form-group">
-            <div class="col-lg-offset-1 col-sm-6 col-lg-2">
+            <div class="col-lg-offset-1 col-xs-6 col-lg-2">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
-            <div class"col-sm-4 col-lg-2">
-            <a href="<?= Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);?>">Register</a>
+            <div class"col-sm-4 col-xs-4 col-lg-2">
+                <a href="<?= Url::toRoute(['pyme/create', 'src' => 'ref1', '#' => 'name']);?>">Register</a>
             </div>
         </div>
 

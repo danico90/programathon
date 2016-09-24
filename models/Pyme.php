@@ -72,7 +72,7 @@ class Pyme extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'ID',
+            'Id' => 'Pyme',
             'NombreComercio' => 'Nombre Comercio',
             'EstadoID' => 'Estado',
             'SectorID' => 'Sector',
@@ -86,7 +86,7 @@ class Pyme extends \yii\db\ActiveRecord
             'FechaCreacion' => 'Fecha Creacion',
             'FechaUltimaActualizacion' => 'Fecha Ultima Actualizacion',
             'EsFacebookAppInstalado' => 'Es Facebook App Instalado',
-            'UsuarioID' => 'Usuario ID',
+            'UsuarioID' => 'Usuario',
             'GeneroPropietarioID' => 'Genero Propietario',
             'CedJuridica' => 'Ced Juridica',
         ];

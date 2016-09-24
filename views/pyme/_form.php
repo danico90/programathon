@@ -6,18 +6,22 @@ use yii\helpers\ArrayHelper;
 use app\models\Sector;
 use app\models\Pais;
 use app\models\Genero;
-
-
-// $items = new array();
-
-// // push_array($items, "AA");
-// // push_array($items, "BB");
-
+use app\models\Estado;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Pyme */
 /* @var $userModel app\models\Usuario */
 /* @var $form yii\widgets\ActiveForm */
+
+$estadoModel = Estado::findOne(['Id' => $model->EstadoID]);
+if ($estadoModel) {
+    $paisModel = Pais::findOne(['Id' => $estadoModel->PaisID ]);
+    $estadoList = ArrayHelper::map(Estado::findAll(['PaisID' => $paisModel->Id]));
+}
+else {
+    $paisModel = new Pais;
+    $estadoList = [];
+}
 
 ?>
 
@@ -27,9 +31,36 @@ use app\models\Genero;
 
     <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true]) ?>
 
-    -- PAIS --
+    <?= $form->field($paisModel, 'Id')
+        ->dropDownList(
+            ArrayHelper::map(Pais::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
+            ['prompt'=>'',
+            'onchange'=>'
+                $.post( "'.Yii::$app->urlManager->createUrl('pais/item?id=').'"+$(this).val(), function( data ) {
+                  $( "select#pyme-estadoid" ).html( data );
+                });'
+                ]    // options
+        )
+        ?>
 
-    <?= $form->field($model, 'EstadoID')->textInput() ?>
+        <?php
+        if (!$estadoModel) {
+            
+        ?>
+            <?= $form->field($model, 'EstadoID')
+                ->dropDownList(['-- Select a country --'])
+            ?>
+        <?php
+        }
+        else {
+            
+        ?>
+            <?= $form->field($model, 'EstadoID')
+                ->dropDownList($estadoList)
+            ?>
+        <?php
+        }
+        ?>
 
     <?= $form->field($model, 'SectorID') ->dropDownList(
             ArrayHelper::map(Sector::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')

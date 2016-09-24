@@ -55,18 +55,18 @@ class Respuesta extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID' => 'ID',
+            'ID' => 'Respuestas',
             'Respuesta01' => 'Respuesta01',
             'Respuesta02' => 'Respuesta02',
             'Respuesta03' => 'Respuesta03',
             'Respuesta04' => 'Respuesta04',
             'Respuesta05' => 'Respuesta05',
             'FechaRespuesta' => 'Fecha Respuesta',
-            'GeneroID' => 'Genero ID',
+            'GeneroID' => 'Genero',
             'Campo01' => 'Campo01',
             'Campo02' => 'Campo02',
             'RangoEdad' => 'Rango Edad',
-            'PymeID' => 'Pyme ID',
+            'PymeID' => 'Pyme',
         ];
     }
 

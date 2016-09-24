@@ -39,7 +39,7 @@ class Sector extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'ID',
+            'Id' => 'Sector',
             'Nombre' => 'Nombre',
         ];
     }

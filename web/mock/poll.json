@@ -1,0 +1,166 @@
+[
+	{
+        "id": "1",
+    	"question": "¿Calidad del producto o servicio?",
+        "anwers": [
+            {
+				"name": "Excelente",
+				"value": "5"
+            },
+            {
+				"name": "Bueno(a)",
+				"value": "4"
+            },
+            {
+				"name": "Normal",
+				"value": "4"
+            },
+            {
+				"name": "Regular",
+				"value": "2"
+            },
+            {
+				"name": "Malo",
+				"value": "1"
+            }
+        ]
+    },
+    {
+        "id": "2",
+    	"question": "¿Tiempo de espera en la atención?",
+        "anwers": [
+            {
+            	"name": "Excelente",
+            	"value": "5"
+            },
+            {
+            	"name": "Bueno(a)",
+            	"value": "4"
+            },
+            {
+            	"name": "Normal",
+            	"value": "4"
+            },
+            {
+            	"name": "Regular",
+            	"value": "2"
+            },
+            {
+            	"name": "Malo",
+            	"value": "1"
+            }
+        ]
+    },
+    {
+        "id": "3",
+    	"question": "¿Imagen de las instalaciones?",
+        "anwers": [
+            {
+            	"name": "Excelente",
+            	"value": "5"
+            },
+            {
+            	"name": "Bueno(a)",
+            	"value": "4"
+            },
+            {
+            	"name": "Normal",
+            	"value": "4"
+            },
+            {
+            	"name": "Regular",
+            	"value": "2"
+            },
+            {
+            	"name": "Malo",
+            	"value": "1"
+            }
+        ]
+    },
+    {
+        "id": "4",
+    	"question": "¿Disponibilidad de producto o servicio solicitado?",
+        "anwers": [
+            {
+            	"name": "Excelente",
+            	"value": "5"
+            },
+            {
+            	"name": "Bueno(a)",
+            	"value": "4"
+            },
+            {
+            	"name": "Normal",
+            	"value": "4"
+            },
+            {
+            	"name": "Regular",
+            	"value": "2"
+            },
+            {
+            	"name": "Malo",
+            	"value": "1"
+            }
+        ]
+    },
+    {
+        "id": "5",
+    	"question": "¿Atención del personal?",
+        "anwers": [
+            {
+            	"name": "Excelente",
+            	"value": "5"
+            },
+            {
+            	"name": "Bueno(a)",
+            	"value": "4"
+            },
+            {
+            	"name": "Normal",
+            	"value": "4"
+            },
+            {
+            	"name": "Regular",
+            	"value": "2"
+            },
+            {
+            	"name": "Malo",
+            	"value": "1"
+            }
+        ]
+    },
+    {
+        "id": "6",
+    	"question": "¿A qué grupo de edad pertenece?",
+        "anwers": [
+            {
+            	"name": "12-17",
+            	"value": "1"
+            },
+            {
+            	"name": "18-33",
+            	"value": "2"
+            },
+            {
+            	"name": "34-45",
+            	"value": "3"
+            },
+            {
+            	"name": "46-55",
+            	"value": "4"
+            },	            
+            {
+            	"name": "56-64",
+            	"value": "5"
+            },
+            {
+            	"name": "65-73",
+            	"value": "6"
+            },
+            {
+            	"name": "74+",
+            	"value": "7"
+            }
+        ]
+    }
+]
