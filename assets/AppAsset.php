@@ -18,10 +18,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
         'css/site.css',
         'dist/css/app.css',
     ];
     public $js = [
+        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
         'dist/js/app.js'
     ];
     public $depends = [

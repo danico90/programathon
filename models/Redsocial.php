@@ -46,7 +46,7 @@ class Redsocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'TipoRedSocialID' => 'Tipo Red Social ID',
+            'TipoRedSocialID' => 'Tipo Red Social',
             'Comentario' => 'Comentario',
             'InformacionContacto' => 'Informacion Contacto',
             'PymeID' => 'Pyme ID',

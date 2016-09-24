@@ -41,7 +41,7 @@ class Genero extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'ID',
+            'Id' => 'Género',
             'Nombre' => 'Nombre',
         ];
     }
