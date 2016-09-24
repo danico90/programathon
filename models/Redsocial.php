@@ -49,7 +49,7 @@ class Redsocial extends \yii\db\ActiveRecord
             'TipoRedSocialID' => 'Tipo Red Social',
             'Comentario' => 'Comentario',
             'InformacionContacto' => 'Informacion Contacto',
-            'PymeID' => 'Pyme ID',
+            'PymeID' => 'Pyme',
             'Link' => 'Link',
         ];
     }

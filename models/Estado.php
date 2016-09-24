@@ -45,7 +45,7 @@ class Estado extends \yii\db\ActiveRecord
         return [
             'Id' => 'Estado',
             'Nombre' => 'Nombre',
-            'PaisID' => 'Pais ID',
+            'PaisID' => 'Pais',
         ];
     }
 

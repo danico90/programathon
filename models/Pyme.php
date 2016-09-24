@@ -74,8 +74,8 @@ class Pyme extends \yii\db\ActiveRecord
         return [
             'Id' => 'Pyme',
             'NombreComercio' => 'Nombre Comercio',
-            'EstadoID' => 'Estado ID',
-            'SectorID' => 'Sector ID',
+            'EstadoID' => 'Estado',
+            'SectorID' => 'Sector',
             'AnnoInicioOperaciones' => 'Anno Inicio Operaciones',
             'NumeroTelefono' => 'Numero Telefono',
             'Direccion' => 'Direccion',
@@ -86,8 +86,8 @@ class Pyme extends \yii\db\ActiveRecord
             'FechaCreacion' => 'Fecha Creacion',
             'FechaUltimaActualizacion' => 'Fecha Ultima Actualizacion',
             'EsFacebookAppInstalado' => 'Es Facebook App Instalado',
-            'UsuarioID' => 'Usuario ID',
-            'GeneroPropietarioID' => 'Genero Propietario ID',
+            'UsuarioID' => 'Usuario',
+            'GeneroPropietarioID' => 'Genero Propietario',
             'CedJuridica' => 'Ced Juridica',
         ];
     }
