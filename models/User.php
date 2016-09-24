@@ -7,8 +7,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $id;
     public $username;
     public $password;
+    public $comercialName;
+    public $country;
     public $authKey;
     public $accessToken;
+    public $PYME;
 
     private static $users = [
         '100' => [
@@ -58,10 +61,18 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
+
+        $userDB = Usuario::findOne(['Usuario' => $username]);
+
+        if ($userDB) {
+            $user = new User();
+            $user->id = $userDB->ID;
+            $user->username = $userDB->Usuario;
+            $user->password = $userDB->Clave;
+            $user->authKey = $userDB->ID + 'key';
+            $user->accessToken = $userDB->ID + 'token';
+
+            return $user;
         }
 
         return null;
@@ -100,5 +111,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public function validateComercialName($commercialName)
+    {
+        
+    }
+
+    public function validateCountry($countryName)
+    {
+
     }
 }
