@@ -122,4 +122,20 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays poll page.
+     *
+     * @return string
+     */
+    public function actionPoll()
+    {
+
+        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'\web\mock\poll.json');
+        $stringFile = file_get_contents(Yii::getAlias('@anyname'));
+        $object = json_decode($stringFile, false);
+        return $this->render('poll', [
+            'model' => $object
+        ]);
+    }
 }
