@@ -58,4 +58,9 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pyme::className(), ['UsuarioID' => 'ID']);
     }
+
+    public function validatePassword($password)
+    {
+        return $this->Clave === $password;
+    }
 }
