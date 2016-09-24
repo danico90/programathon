@@ -15,6 +15,8 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
+    public $comercialName;
+    public $country;
     public $rememberMe = true;
 
     private $_user = false;
@@ -27,11 +29,17 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password', 'comercialName', 'country'], 'required'],
+            [['comercialName'], 'string', 'max' => 100],
+            [['username'], 'string', 'max' => 50],
+            [['password'], 'string', 'min' => 8],
+            [['password'], 'string', 'max' => 10],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['comercialName', 'validateCommerceName'],
+            ['country', 'validateCountry']
         ];
     }
 
@@ -46,11 +54,69 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
+    }
+
+    public function validateCommerceName($attribute, $params) 
+    {
+        if (!$this->hasErrors()) {
+
+            $user = $this->getUser();
+            $dbUser = Usuario::findOne(['ID' => $user->id]);
+            $userPymes = Pyme::find(['UsuarioID' => $user->id]);
+            
+            if (!$userPymes || $userPymes->count() == 0) {
+                $this->addError($attribute, 'Incorrect commercial name'); 
+            }
+            else {
+                $found = 0;
+                foreach($userPymes->all() as $pyme) {
+                    if ($pyme->NombreComercio == $this->comercialName)
+                    {
+                        $found = 1;
+                    }
+                }
+                if ($found == 0) {
+                    
+                    $this->addError($attribute, 'Incorrect commercial name'); 
+                }
+            }
+
+
+        }
+
+    }
+
+     public function validateCountry($attribute, $params) 
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            $dbUser = Usuario::findOne(['ID' => $user->id]);
+            $userPymes = Pyme::find(['UsuarioID' => $user->id]);
+            
+            if (!$userPymes || $userPymes->count() == 0) {
+                $this->addError($attribute, 'Incorrect country'); 
+            }
+            else {
+                $found = 0;
+                foreach($userPymes->all() as $pyme) {
+                    $estado = Estado::findOne(['Id' => $pyme->EstadoID]);
+                    
+                    if ($estado->PaisID == $this->country)
+                    {
+                        $found = 1;
+                    }
+                }
+                if ($found == 0) {
+                    
+                    $this->addError($attribute, 'Incorrect country'); 
+                }
+            }
+        }
+
     }
 
     /**
@@ -60,6 +126,8 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            //$dbUser = Usuario::findOne(['ID' => $this->id]);
+            Yii::$app->session->set('user', $this->getUser());
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;

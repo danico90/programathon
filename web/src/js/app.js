@@ -1,10 +1,9 @@
 /*
-* App
+*  App
 */
 
-console.log('App test 2');
-
 var app = {};
+app.initializers = {};
 app.components = {};
 app.templates = {};
 app.lib = {};
