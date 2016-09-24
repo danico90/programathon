@@ -1,0 +1,30 @@
+/* 
+    USAGE: 
+
+    <script>
+		$(document).ready(function() {
+			new app.components.<component-name>(var1, var2);
+		});
+	</script>
+
+*/
+
+
+(function() {
+    'use strict';
+
+    app.components.<component-name> = function(var1, var2) {
+        var self = this;
+        
+    };
+
+    /****** METHODS *******/
+
+    var Prototype = app.components.<component-name>.prototype;
+
+    Prototype.exampleFunction = function() {
+        var self = this;
+
+    };
+    
+})();

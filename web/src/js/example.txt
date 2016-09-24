@@ -1,0 +1,25 @@
+/* 
+    USAGE: 
+    
+    <script>
+        $(document).ready(function($) {
+            app.templates.<template-name>.init(var1, var2);
+        });
+    </script>
+
+*/
+
+
+(function() {
+
+    "use strict";
+
+    function init(var1, var 2) {
+
+    }
+
+    app.templates.<template-name> = {
+        init: init,
+    };
+
+})();
