@@ -46,7 +46,7 @@ class Pais extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'Pais',
+            'Id' => 'País',
             'Nombre' => 'Nombre',
             'Iso' => 'Iso',
             'Iso3' => 'Iso3',

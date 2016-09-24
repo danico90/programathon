@@ -40,7 +40,7 @@ class Tiporedsocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'ID',
+            'Id' => 'Tipo de red social',
             'Nombre' => 'Nombre',
         ];
     }

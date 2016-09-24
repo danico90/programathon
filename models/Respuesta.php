@@ -55,7 +55,7 @@ class Respuesta extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID' => 'ID',
+            'ID' => 'Respuestas',
             'Respuesta01' => 'Respuesta01',
             'Respuesta02' => 'Respuesta02',
             'Respuesta03' => 'Respuesta03',

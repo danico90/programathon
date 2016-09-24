@@ -72,7 +72,7 @@ class Pyme extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Id' => 'ID',
+            'Id' => 'Pyme',
             'NombreComercio' => 'Nombre Comercio',
             'EstadoID' => 'Estado ID',
             'SectorID' => 'Sector ID',
