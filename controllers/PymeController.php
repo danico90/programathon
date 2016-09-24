@@ -5,9 +5,15 @@ namespace app\controllers;
 use Yii;
 use app\models\Pyme;
 use app\models\PymeSearch;
+use app\models\Usuario;
+use app\models\UsuarioSearch;
+use app\models\RedSocial;
+use app\models\RedSocialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\DbMatch\TipoRedSocialID;
+use app\models\PymeSocialMedias;
 
 /**
  * PymeController implements the CRUD actions for Pyme model.
@@ -64,12 +70,16 @@ class PymeController extends Controller
     public function actionCreate()
     {
         $model = new Pyme();
-
+        $socialModels = new PymeSocialMedias();
+        $userModel = new Usuario();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->Id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'userModel' => $userModel,
+                'socialModels' => $socialModels,
             ]);
         }
     }

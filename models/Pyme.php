@@ -52,7 +52,7 @@ class Pyme extends \yii\db\ActiveRecord
             [['NombreComercio', 'EstadoID', 'SectorID', 'AnnoInicioOperaciones', 'NumeroTelefono', 'Direccion', 'Logo', 'ExtensionLogo', 'FechaCreacion', 'FechaUltimaActualizacion', 'UsuarioID', 'GeneroPropietarioID', 'CedJuridica'], 'required'],
             [['EstadoID', 'SectorID', 'AnnoInicioOperaciones', 'UsuarioID'], 'integer'],
             [['EsActiva', 'EsNegocioFamiliar', 'EsFacebookAppInstalado'], 'boolean'],
-            [['Logo'], 'string'],
+            [['Logo'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, gif'],
             [['FechaCreacion', 'FechaUltimaActualizacion'], 'safe'],
             [['NombreComercio'], 'string', 'max' => 100],
             [['NumeroTelefono', 'CedJuridica'], 'string', 'max' => 50],
@@ -74,10 +74,10 @@ class Pyme extends \yii\db\ActiveRecord
         return [
             'Id' => 'ID',
             'NombreComercio' => 'Nombre Comercio',
-            'EstadoID' => 'Estado ID',
-            'SectorID' => 'Sector ID',
-            'AnnoInicioOperaciones' => 'Anno Inicio Operaciones',
-            'NumeroTelefono' => 'Numero Telefono',
+            'EstadoID' => 'Estado',
+            'SectorID' => 'Sector',
+            'AnnoInicioOperaciones' => 'Año Inicio Operaciones',
+            'NumeroTelefono' => 'Numero de Teléfono',
             'Direccion' => 'Direccion',
             'EsActiva' => 'Es Activa',
             'EsNegocioFamiliar' => 'Es Negocio Familiar',
@@ -87,7 +87,7 @@ class Pyme extends \yii\db\ActiveRecord
             'FechaUltimaActualizacion' => 'Fecha Ultima Actualizacion',
             'EsFacebookAppInstalado' => 'Es Facebook App Instalado',
             'UsuarioID' => 'Usuario ID',
-            'GeneroPropietarioID' => 'Genero Propietario ID',
+            'GeneroPropietarioID' => 'Genero Propietario',
             'CedJuridica' => 'Ced Juridica',
         ];
     }
