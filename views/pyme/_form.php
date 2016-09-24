@@ -14,9 +14,10 @@ use app\models\Estado;
 /* @var $form yii\widgets\ActiveForm */
 
 $estadoModel = Estado::findOne(['Id' => $model->EstadoID]);
+
 if ($estadoModel) {
     $paisModel = Pais::findOne(['Id' => $estadoModel->PaisID ]);
-    $estadoList = ArrayHelper::map(Estado::findAll(['PaisID' => $paisModel->Id]));
+    $estadoList = ArrayHelper::map(Estado::findAll(['PaisID' => $paisModel->Id]), 'Id', 'Nombre');
 }
 else {
     $paisModel = new Pais;
