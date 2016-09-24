@@ -17,17 +17,17 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+            // 'access' => [
+            //     'class' => AccessControl::className(),
+            //     'only' => ['logout'],
+            //     'rules' => [
+            //         [
+            //             'actions' => ['logout'],
+            //             'allow' => true,
+            //             'roles' => ['@'],
+            //         ],
+            //     ],
+            // ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -60,7 +60,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->redirect('login');
+        if (Yii::$app->session->get('user')) {
+            return $this->redirect('site/dashboard');
+        }
+        else {
+        return $this->redirect('site/login');
+        }
     }
 
     /**
@@ -70,13 +75,13 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if (Yii::$app->session->get('user')) {
+            return $this->redirec('site/dashboard');
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('about');
+            return $this->redirect('site/dashboard');
         }
         return $this->render('login', [
             'model' => $model,
@@ -91,6 +96,8 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+
+        Yii::$app->session->destroy();
 
         return $this->goHome();
     }
