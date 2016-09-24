@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Pais;
+use app\models\Estado;
 use app\models\PaisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -104,6 +105,25 @@ class PaisController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionItem($id)
+    {
+        $statesCount = Estado::find()->where(['PaisID' => $id])->count();
+ 
+        if($statesCount>0){
+            $states = Estado::find()
+                        ->where(['PaisID' => $id])
+                        ->orderBy('Nombre')
+                        ->all();
+            foreach($states as $state){
+                
+                echo "<option value='".$state->Id."'>".$state->Nombre."</option>";
+            }
+        }
+        else{
+            echo "<option> -- No hay estados para este país -- </option>";
+        }
     }
 
     /**
