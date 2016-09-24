@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
     /**
      * @inheritdoc
@@ -76,12 +76,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (Yii::$app->session->get('user')) {
-            return $this->redirec('site/dashboard');
+            return $this->redirect('dashboard');
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('site/dashboard');
+            return $this->redirect('dashboard');
         }
         return $this->render('login', [
             'model' => $model,
