@@ -1,0 +1,5 @@
+/*
+*	Page
+*/
+
+console.log('Page');

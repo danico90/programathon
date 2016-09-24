@@ -1,0 +1,5 @@
+/*
+*	Components
+*/
+
+console.log('components');
