@@ -17,8 +17,10 @@ var config = {
 	js: {
 		src: [
 			'./web/src/js/app.js',
+			'./web/src/js/initializers/**',
 			'./web/src/js/components/**',
-			'./web/src/js/pages/**'
+			'./web/src/js/pages/**',
+			'./web/src/js/init.js'
 		],
 		outputName: 'app.js',
 		dest: './web/dist/js/'
