@@ -47,12 +47,17 @@ $this->title = 'Login';
         
         <div class="form-group">
             <div class="col-lg-offset-1 col-xs-4 col-lg-2">
+                <?= Html::submitButton('Cancel', ['class' => 'btn btn-primary', 'name' => 'login-button', 'onclick'=>'return false;']) ?>
+            </div>
+            <div class="col-xs-4 col-lg-2">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
-            <div class"col-sm-4 col-xs-4 col-lg-2">
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-xs-4 col-lg-11">
                 <a href="<?= Url::toRoute(['pyme/create']);?>">Registro</a>
             </div>
-            <div class"col-sm-4 col-xs-4 col-lg-2">
+            <div class="col-lg-offset-1 col-sm-4 col-xs-4 col-lg-11">
                 <a href="mailto:contacto@fundes.com" onclick="">Olvidé la contraseña</a>
             </div>
         </div>
