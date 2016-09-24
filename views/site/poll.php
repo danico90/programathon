@@ -5,7 +5,6 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
 
 $this->title = 'Poll';
 ?>
@@ -13,14 +12,15 @@ $this->title = 'Poll';
     <h1><?= Html::encode($this->title) ?></h1>
     <?php  
 	    foreach($model as $question){
-	    	echo '<div class="question-row">';
-	        echo '<label>'.$question->question.'</label>';
-
-	    	foreach($question->anwers as $anwers){
-	    		echo '<div class="anwers-row">';
-	    		echo '<input type="radio" name="'.$question->id.'" value="'.$anwers->value.'">'.$anwers->name;
-	    		echo '</div>';
-	    	}
+	    	echo '<div class="question-row row">';
+	        echo '<label class="col-sm-4">'.$question->question.'</label>';
+			echo '<div class="anwers-row col-sm-8">';
+		    	foreach($question->anwers as $anwers){
+		    		
+		    		echo '<input type="radio" name="'.$question->id.'" value="'.$anwers->value.'">'.$anwers->name;
+		    		echo '</br>';
+		    	}
+	    	echo '</div>';
 	    	echo '</div></br>';
 	    } 
 	    
