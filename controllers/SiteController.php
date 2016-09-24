@@ -61,11 +61,12 @@ class SiteController extends BaseController
     public function actionIndex()
     {
         if (Yii::$app->session->get('user')) {
-            return $this->redirect('site/dashboard');
+            return $this->redirect('/site/dashboard');
         }
         else {
-        return $this->redirect('site/login');
+            return $this->redirect('/site/login');
         }
+
     }
 
     /**
@@ -74,14 +75,11 @@ class SiteController extends BaseController
      * @return string
      */
     public function actionLogin()
-    {
-        if (Yii::$app->session->get('user')) {
-            return $this->redirect('dashboard');
-        }
+{
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('dashboard');
+            return $this->redirect('/site/dashboard');
         }
         return $this->render('login', [
             'model' => $model,

@@ -29,7 +29,7 @@ $this->title = 'Login';
         ],
     ]); ?>
 
-        <?= $form->field($model, 'comercialName')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'comercialName')->textInput() ?>
 
         
 
@@ -49,11 +49,14 @@ $this->title = 'Login';
         ]) ?>
         
         <div class="form-group">
-            <div class="col-lg-offset-1 col-xs-6 col-lg-2">
+            <div class="col-lg-offset-1 col-xs-4 col-lg-2">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             <div class"col-sm-4 col-xs-4 col-lg-2">
-                <a href="<?= Url::toRoute(['pyme/create', 'src' => 'ref1', '#' => 'name']);?>">Register</a>
+                <a href="<?= Url::toRoute(['pyme/create']);?>">Register</a>
+            </div>
+            <div class"col-sm-4 col-xs-4 col-lg-2">
+                <a href="mailto:contacto@fundes.com" onclick="">Olvidé la contraseña</a>
             </div>
         </div>
 
