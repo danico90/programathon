@@ -27,10 +27,24 @@ class BaseController extends Controller
         ];
     }
 
-    public function __construct($id, $module, $config = [])
+    public function init()
     {
-       
-        parent::__construct($id, $module, $config);
+         
+        if (Yii::$app->request->pathInfo == 'site/login' || Yii::$app->request->pathInfo == 'pyme/create') {
+            if (Yii::$app->session->get('user')) {
+                
+                return $this->redirect('/site/dashboard');
+            }
+        }
+        else {
+            
+            if (!Yii::$app->session->get('user')) {
+                
+                return $this->redirect('/site/login');
+            }
+        }
+        
+        parent::init();
     }
 
    

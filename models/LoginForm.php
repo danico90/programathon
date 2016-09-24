@@ -66,7 +66,7 @@ class LoginForm extends Model
 
             $user = $this->getUser();
             $dbUser = Usuario::findOne(['ID' => $user->id]);
-            $userPymes = Pyme::find(['UsuarioID' => $user->id]);
+            $userPymes = Pyme::find()->where(['UsuarioID' => $user->id]);
             
             if (!$userPymes || $userPymes->count() == 0) {
                 $this->addError($attribute, 'Incorrect commercial name'); 
@@ -74,7 +74,7 @@ class LoginForm extends Model
             else {
                 $found = 0;
                 foreach($userPymes->all() as $pyme) {
-                    if ($pyme->NombreComercio == $this->comercialName)
+                    if ($pyme->NombreComercio === $this->comercialName)
                     {
                         $found = 1;
                     }
@@ -95,7 +95,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             $dbUser = Usuario::findOne(['ID' => $user->id]);
-            $userPymes = Pyme::find(['UsuarioID' => $user->id]);
+            $userPymes = Pyme::find()->where(['UsuarioID' => $user->id]);
             
             if (!$userPymes || $userPymes->count() == 0) {
                 $this->addError($attribute, 'Incorrect country'); 
@@ -145,5 +145,15 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Nombre de usuario',
+            'password' => 'Contraseña',
+            'country' => 'País',
+            'comercialName' => 'Nombre comercial'
+        ];
     }
 }

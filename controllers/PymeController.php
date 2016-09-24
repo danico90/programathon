@@ -18,7 +18,7 @@ use app\models\PymeSocialMedias;
 /**
  * PymeController implements the CRUD actions for Pyme model.
  */
-class PymeController extends Controller
+class PymeController extends BaseController
 {
     /**
      * @inheritdoc
