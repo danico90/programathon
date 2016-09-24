@@ -75,7 +75,7 @@ class SiteController extends BaseController
      * @return string
      */
     public function actionLogin()
-{
+    {
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -84,6 +84,11 @@ class SiteController extends BaseController
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+    public function actionDashboard()
+    {
+        return $this->render('dashboard');
     }
 
     /**
