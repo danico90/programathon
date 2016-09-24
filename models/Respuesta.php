@@ -62,11 +62,11 @@ class Respuesta extends \yii\db\ActiveRecord
             'Respuesta04' => 'Respuesta04',
             'Respuesta05' => 'Respuesta05',
             'FechaRespuesta' => 'Fecha Respuesta',
-            'GeneroID' => 'Genero ID',
+            'GeneroID' => 'Genero',
             'Campo01' => 'Campo01',
             'Campo02' => 'Campo02',
             'RangoEdad' => 'Rango Edad',
-            'PymeID' => 'Pyme ID',
+            'PymeID' => 'Pyme',
         ];
     }
 

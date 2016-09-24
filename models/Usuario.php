@@ -11,12 +11,16 @@ use Yii;
  * @property string $Usuario
  * @property string $NombreCompleto
  * @property string $Clave
+ * @property string $RepetirClave
  * @property string $EmailContacto
+ * @property string $RepetirEmailContacto
  *
  * @property Pyme[] $pymes
  */
 class Usuario extends \yii\db\ActiveRecord
 {
+    public $RepetirClave;
+    public $RepetirEmailContacto;
     /**
      * @inheritdoc
      */
@@ -31,8 +35,8 @@ class Usuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto'], 'required'],
-            [['Usuario', 'Clave', 'EmailContacto'], 'string', 'max' => 50],
+            [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
+            [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
             [['NombreCompleto'], 'string', 'max' => 100],
         ];
     }
@@ -46,7 +50,8 @@ class Usuario extends \yii\db\ActiveRecord
             'ID' => 'Usuario',
             'Usuario' => 'Usuario',
             'NombreCompleto' => 'Nombre Completo',
-            'Clave' => 'Clave',
+            'Clave' => 'Contraseña',
+            'RepetirClave' => 'Repetir Contraseña',
             'EmailContacto' => 'Email Contacto',
         ];
     }
