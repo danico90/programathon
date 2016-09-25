@@ -1,5 +1,0 @@
-/*
-*	Components
-*/
-
-console.log('components');

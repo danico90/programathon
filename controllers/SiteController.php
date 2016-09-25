@@ -192,6 +192,16 @@ class SiteController extends BaseController
         return $this->goHome();
     }
 
+    public function actionActivate()
+    {
+        $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
+        if (isset($model))
+        {
+            $model->EsFacebookAppInstalado = 1;
+            $model->save(false);
+        }
+    }
+
     /**
      * Displays contact page.
      *

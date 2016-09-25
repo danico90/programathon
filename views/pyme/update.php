@@ -8,9 +8,7 @@ use yii\helpers\Html;
 /* @var $socialModels array off app\models\RedSocial */
 
 $this->title = 'Update Pyme: ' . $model->Id;
-$this->params['breadcrumbs'][] = ['label' => 'Pymes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Id, 'url' => ['view', 'id' => $model->Id]];
-$this->params['breadcrumbs'][] = 'Update';
+
 ?>
 <div class="pyme-update">
 

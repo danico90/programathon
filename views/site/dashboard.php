@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-
 ?>
 <div class="dashboard-container">
 
@@ -16,7 +15,16 @@ use yii\widgets\ActiveForm;
 			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
 		</div>
 	</div>
+	<div class="col-md-12">
+			<button id="share-fb">Share in facebook</button>
+	</div>
 	<?php $form = ActiveForm::begin(); ?>
+	<?php
+	if (!$model->EsFacebookAppInstalado) {
+		echo '<h4>Comparta el app primero para iniciar la captura de datos.</h4>';
+	}
+	?>
+	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
 	<div class="row">
 		<div class="col-sm-12 user-info">
 			<h3><?= Yii::$app->session->get('user')->username ?></h3>
@@ -33,9 +41,7 @@ use yii\widgets\ActiveForm;
 		
 		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
 		</div>
-		<div class="col-md-12">
-			<button id="share-fb">Share in facebook</button>
-		</div>
+		
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
 	<div class="row result-filter">
@@ -83,6 +89,7 @@ use yii\widgets\ActiveForm;
 			</div>
 		</div>
 		
+	</div>
 	</div>
 	<?php ActiveForm::end(); ?>
 </div>
@@ -390,6 +397,9 @@ use yii\widgets\ActiveForm;
 		app.initializers.fbSDK.init().then(function() {
 			$('#share-fb').on('click', function() {
 				app.initializers.fbSDK.share(window.location.origin + '/respuesta/create?id=' + <?php echo $pymeId ;?>);
+				$.post( "<?=Yii::$app->urlManager->createUrl('site/activate')?>", function( data ) {
+                  console.log('data', data);
+                });
 			});
 		});
 	});

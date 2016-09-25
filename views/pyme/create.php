@@ -1,10 +1,6 @@
 <?php
 
-
-
-
 use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Pyme */
@@ -12,8 +8,7 @@ use yii\helpers\Html;
 /* @var $socialModels array off app\models\RedSocial */
 
 $this->title = 'Create Pyme';
-$this->params['breadcrumbs'][] = ['label' => 'Pymes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="pyme-create">
 
