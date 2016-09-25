@@ -21,6 +21,7 @@ class Usuario extends \yii\db\ActiveRecord
 {
     public $RepetirClave;
     public $RepetirEmailContacto;
+    public $EstadoID;
     /**
      * @inheritdoc
      */
@@ -39,7 +40,8 @@ class Usuario extends \yii\db\ActiveRecord
             [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
             [['NombreCompleto'], 'string', 'max' => 100],
             [['RepetirClave'], 'validatePassword'],
-            [['RepetirEmailContacto'], 'validateEmail']
+            [['RepetirEmailContacto'], 'validateEmail'],
+            [['Usuario'], 'validateUniqeUserName']
         ];
     }
 
@@ -56,6 +58,7 @@ class Usuario extends \yii\db\ActiveRecord
             'RepetirClave' => 'Repetir Contraseña',
             'EmailContacto' => 'Email Contacto',
             'RepetirEmailContacto' => 'Repetir el Email de Contacto',
+            'EstadoID' => ''
         ];
     }
 
@@ -70,20 +73,39 @@ class Usuario extends \yii\db\ActiveRecord
     /**
      * Validates the password. It shoud match when repeating the password.
      */
-    public function validatePassword($password)
+    public function validatePassword($passwordAttr)
     {
-        if($this->Clave != $password) {
-            $this->addError($password, 'Las claves no son iguales');
+        if($this->Clave != $this->RepetirClave) {
+            $this->addError($passwordAttr, 'Las claves no son iguales');
         }
     }
 
     /**
      * Validates the email. It shoud match when repeating the email.
      */
-    public function validateEmail($email)
+    public function validateEmail($emailAttr)
     {
-        if($this->EmailContacto != $email) {
-            $this->addError($email, 'Las email no son iguales');
+        if($this->EmailContacto != $this->RepetirEmailContacto) {
+            $this->addError($emailAttr, 'Las email no son iguales');
+        }
+    }
+
+    /**
+     * Validates the unique UserName on a Pyme
+     */
+    public function validateUniqeUserName($userNameAttr)
+    {
+        
+        $isUnique = true;
+        $dbUser = Usuario::findOne(['Usuario' => $this->Usuario, 'Clave' => $this->Clave]);
+echo "-----------------";
+        
+        if($dbUser) {
+            print_r($dbUser);
+            $dbPyme = Pyme::findOne(['UsuarioID' => $dbUser->ID, 'EstadoID' => $this->EstadoID]);
+            if($dbPyme) {
+                $this->addError($userNameAttr, 'El nombre de usuario indicado para esa PYME para el país seleccionado ya existe.');
+            }
         }
     }
 }

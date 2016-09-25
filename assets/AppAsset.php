@@ -17,6 +17,9 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public $jsOptions = array(
+       'position' => \yii\web\View::POS_HEAD
+    );
     public $css = [
         'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
         'css/site.css',
