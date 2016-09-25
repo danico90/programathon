@@ -38,13 +38,12 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
-            [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
-            [['NombreCompleto'], 'string', 'max' => 100],
-            [['Clave', 'RepetirClave'], 'string', 'max' => 8],
-            [['Clave', 'RepetirClave'], 'string', 'min' => 6],
+            [['Usuario', 'Clave', 'EmailContacto', 'RepetirEmailContacto', 'NombreCompleto'], 'string', 'max' => 50],
+            [['Clave', 'RepetirClave'], 'string', 'min' => 8, 'max' => 10],
             [['RepetirClave'], 'validatePassword'],
             [['RepetirEmailContacto'], 'validateEmail'],
-            [['Usuario'], 'validateUniqeUserName']
+            [['Usuario'], 'validateUniqeUserName'],
+            [['EmailContacto', 'RepetirEmailContacto'], 'email']
         ];
     }
 

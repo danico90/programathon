@@ -10,13 +10,13 @@
 
     function init() {
 
-        $(".verify-cancel").click(function(e) {
+        $(".verify-continue").click(function(e) {
 
             var message = $(this).attr("data-message");
 
             // Default message
             if(!message){
-                message = "¿Desea cancelar?"
+                message = "¿Desea proseguir?"
             }
 
             var confirmation = confirm(message);
@@ -28,7 +28,7 @@
         });
     }
 
-    app.initializers.verifyCancel = {
+    app.initializers.verifyContinue = {
         init: init,
     };
 

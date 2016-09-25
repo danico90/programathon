@@ -91,6 +91,7 @@ class PymeController extends BaseController
                     $model->FechaCreacion = date("Y-m-d H:i:s");
                     $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
                     $model->EsFacebookAppInstalado = 0;
+                    $model->EsActiva = 1;
 
                     if($file=UploadedFile::getInstance($model, 'Logo'))
                     {
@@ -141,6 +142,15 @@ class PymeController extends BaseController
                             $LinkWebsite->PymeID = $model->Id;
                             $LinkWebsite->TipoRedSocialID = TipoRedSocialID::Website;
                             $LinkWebsite->save();
+                        }
+
+                        // Correo Contacto
+                        if( $socialModels->correoContacto ){
+                            $LinkContacto = new RedSocial();
+                            $LinkContacto->Link = $socialModels->correoContacto;
+                            $LinkContacto->PymeID = $model->Id;
+                            $LinkContacto->TipoRedSocialID = TipoRedSocialID::CorreoContacto;
+                            $LinkContacto->save();
                         }
 
                         return $this->redirect(['view', 'id' => $model->Id]);

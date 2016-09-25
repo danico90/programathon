@@ -12,6 +12,7 @@ class PymeSocialMedias extends Model
     public $linkLinkedIn;
     public $linkYoutube;
     public $linkWebsite;
+    public $correoContacto;
 
     /**
      * @return array the validation rules.
@@ -21,6 +22,8 @@ class PymeSocialMedias extends Model
         return [
             [['linkFacebook'], 'required'],
             [['linkFacebook', 'linkTwitter', 'linkLinkedIn', 'linkYoutube', 'linkWebsite'], 'string','max'=> 300],
+            [['correoContacto'], 'string','max'=> 50],
+            ['correoContacto', 'email'],
         ];
     }
 

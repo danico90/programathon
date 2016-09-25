@@ -9,6 +9,6 @@
 		app.initializers.datePicker.init();
 		
 		// Adds the cancel button event.
-		app.initializers.verifyCancel.init();
+		app.initializers.verifyContinue.init();
 	});
 })();

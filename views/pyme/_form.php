@@ -43,6 +43,7 @@ else {
         $years[substr($x, 2, 3)] = $x;
     }
 
+    $pymeIsNew = !isset($model->Id);
 
 ?>
 
@@ -50,7 +51,7 @@ else {
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
     <?= $form->field($paisModel, 'Id')
         ->dropDownList(
@@ -106,7 +107,9 @@ else {
 
     <?= $form->field($model, 'Direccion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'EsActiva')->checkbox() ?>
+    <?php if( !$pymeIsNew ) : ?>
+        <?= $form->field($model, 'EsActiva')->checkbox(['class' => "IsActiveInput"]); ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'EsNegocioFamiliar')->checkbox() ?>
 
@@ -119,6 +122,7 @@ else {
     <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
     
     <hr>
     <!-- Third Group of questions -->
@@ -130,8 +134,8 @@ else {
     <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <a class="verify-cancel btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?= Url::toRoute(['site/login']);?>">Cancelar</a>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?= Url::toRoute(['site/login']);?>">Cancelar</a>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -9,4 +9,5 @@ class TipoRedSocialID
     const Linkedin =3;
     const YouTube =4;
     const Website =5;
+    const CorreoContacto = 6;
 }

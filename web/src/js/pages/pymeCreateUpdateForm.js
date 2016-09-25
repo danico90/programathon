@@ -2,6 +2,7 @@
 	
 	function init() {
         onEstadoInputChange();
+        onIsActiveInputChange();
 	}
 
     // Sets the value of the "EstadoID" select into the
@@ -14,6 +15,24 @@
             $( "#usuario-usuarioestadoid" ).val($(this).val());
         });
 
+    }
+
+    function onIsActiveInputChange() {
+        $(".IsActiveInput").change(function(e) {
+
+            $submitButton = $("button[type=submit]");
+
+            if($(this).is(":checked")) {
+                $submitButton.removeClass("verify-continue");
+            }
+            else {
+                $submitButton.addClass("verify-continue");
+            }
+
+            // inits the verifyContinue functionality 
+            app.initializers.verifyContinue.init();
+            
+        });
     }
 
 	app.templates.pymeCreateUpdateForm = {
