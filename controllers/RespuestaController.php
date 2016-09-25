@@ -68,7 +68,7 @@ class RespuestaController extends Controller
      */
     public function actionCreate()
     {
-        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'\web\mock\poll.json');
+        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'/web/mock/poll.json');
         $stringFile = file_get_contents(Yii::getAlias('@anyname'));
         $object = json_decode($stringFile, false);
         $date = new DateTime();
