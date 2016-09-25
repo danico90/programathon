@@ -44,6 +44,13 @@ else {
     }
 
     $pymeIsNew = !isset($model->Id);
+    if($pymeIsNew){
+        $returnPage = Url::toRoute(['site/login']);
+    }
+    else{
+        $returnPage = Url::toRoute(['site/dashboard']);
+    }
+     
 
 ?>
 
@@ -135,7 +142,7 @@ else {
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?= Url::toRoute(['site/login']);?>">Cancelar</a>
+        <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?php echo $returnPage; ?>">Cancelar</a>
     </div>
 
     <?php ActiveForm::end(); ?>
