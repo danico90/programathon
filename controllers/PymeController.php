@@ -14,6 +14,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\DbMatch\TipoRedSocialID;
 use app\models\PymeSocialMedias;
+use yii\web\UploadedFile;
 
 /**
  * PymeController implements the CRUD actions for Pyme model.
@@ -86,7 +87,7 @@ class PymeController extends BaseController
                 $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
                 $model->EsFacebookAppInstalado = 0;
 
-                if($file=CUploadedFile::getInstance($this,'Logo'))
+                if($file=UploadedFile::getInstance($model, 'Logo'))
                 {
                     $this->Logo=file_get_contents($file->tempName);
                     $this->ExtensionLogo = pathinfo($file->tempName, PATHINFO_EXTENSION);
