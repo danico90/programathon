@@ -2,8 +2,14 @@
 	'use strict';
 
 	function init() {
+		var deferred = $.Deferred();
+
 		$.ajaxSetup({ cache: true });
-		$.getScript('//connect.facebook.net/en_US/sdk.js', fbInit);
+		$.getScript('//connect.facebook.net/en_US/sdk.js', fbInit).then(function() {
+			deferred.resolve();
+		});
+
+		return deferred.promise();
 	}
 
 	function fbInit() {
@@ -15,14 +21,13 @@
 		});
 		
 		// Allow an status callback
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
+		checkLoginState();
 	}
 
 	function checkLoginState() {
 		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
+			console.log(response);
+			return response;
 		});
 	}
 
