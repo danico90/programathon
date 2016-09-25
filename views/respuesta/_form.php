@@ -11,16 +11,20 @@ use yii\widgets\ActiveForm;
 <div class="respuesta-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'Respuesta01')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta02')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta03')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta04')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta05')->textInput() ?>
+    <?php  
+        foreach($data as $question){
+            echo '<div class="question-row row">';
+            echo '<label class="col-sm-4 control-label required" for="respuesta-'.$question->id.'">'.$question->question.'</label>';
+            echo '<div class="anwers-row col-sm-8">';
+            
+                foreach($question->anwers as $anwers){
+                   
+                }
+            echo '</div>';
+            echo '<div class="help-block"></div>';
+            echo '</div></br>';
+        } 
+    ?>
 
     <?= $form->field($model, 'FechaRespuesta')->textInput() ?>
 
