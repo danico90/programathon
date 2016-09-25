@@ -2,6 +2,9 @@
 	
 ?>
 <div class="container">
+	<?php if(isset($_GET['success'])) : ?>
+		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
+	<?php endif; ?>
 	<div class="row">
 		<div class="col-sm-12 company-info">
 			<img src="" alt="test company">

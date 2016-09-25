@@ -15,9 +15,14 @@ use app\models\Pais;
 $this->title = 'Login';
 
 ?>
+
+<?php if(isset($_GET['success'])) : ?>
+    <div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
+<?php endif; ?>
+
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
-
+    
     <p>Please fill out the following fields to login:</p>
 
     <?php $form = ActiveForm::begin([

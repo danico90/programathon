@@ -153,7 +153,7 @@ class PymeController extends BaseController
                             $LinkContacto->save();
                         }
 
-                        return $this->redirect(['view', 'id' => $model->Id]);
+                        return $this->redirect(['site/login/', 'success'=> true]);
                     } 
 
                 }
