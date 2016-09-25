@@ -14,6 +14,7 @@ use Yii;
  * @property string $RepetirClave
  * @property string $EmailContacto
  * @property string $RepetirEmailContacto
+ * @property int $UsuarioEstadoId
  *
  * @property Pyme[] $pymes
  */
@@ -21,7 +22,7 @@ class Usuario extends \yii\db\ActiveRecord
 {
     public $RepetirClave;
     public $RepetirEmailContacto;
-    public $EstadoID;
+    public $UsuarioEstadoId;
     /**
      * @inheritdoc
      */
@@ -39,6 +40,8 @@ class Usuario extends \yii\db\ActiveRecord
             [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
             [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
             [['NombreCompleto'], 'string', 'max' => 100],
+            [['Clave', 'RepetirClave'], 'string', 'max' => 8],
+            [['Clave', 'RepetirClave'], 'string', 'min' => 6],
             [['RepetirClave'], 'validatePassword'],
             [['RepetirEmailContacto'], 'validateEmail'],
             [['Usuario'], 'validateUniqeUserName']
@@ -58,7 +61,7 @@ class Usuario extends \yii\db\ActiveRecord
             'RepetirClave' => 'Repetir Contraseña',
             'EmailContacto' => 'Email Contacto',
             'RepetirEmailContacto' => 'Repetir el Email de Contacto',
-            'EstadoID' => ''
+            'UsuarioEstadoId' => ''
         ];
     }
 
@@ -93,19 +96,27 @@ class Usuario extends \yii\db\ActiveRecord
     /**
      * Validates the unique UserName on a Pyme
      */
-    public function validateUniqeUserName($userNameAttr)
+    public function isUniqueUserName()
     {
-        
         $isUnique = true;
         $dbUser = Usuario::findOne(['Usuario' => $this->Usuario, 'Clave' => $this->Clave]);
-echo "-----------------";
-        
-        if($dbUser) {
-            print_r($dbUser);
-            $dbPyme = Pyme::findOne(['UsuarioID' => $dbUser->ID, 'EstadoID' => $this->EstadoID]);
-            if($dbPyme) {
-                $this->addError($userNameAttr, 'El nombre de usuario indicado para esa PYME para el país seleccionado ya existe.');
+
+        if($dbUser != NULL) {
+            $dbPyme = Pyme::findOne(['UsuarioID' => $dbUser->ID, 'EstadoID' => $this->UsuarioEstadoId]);
+            if($dbPyme != NULL) {
+                $isUnique = false;
             }
+        }
+
+        return $isUnique;
+    } 
+
+    public function validateUniqeUserName($userNameAttr)
+    {
+        if( !$this->isUniqueUserName() ){
+            $this->addError($userNameAttr, 'El nombre de usuario indicado para esa PYME para el país seleccionado ya existe.');
+        }
+        else{
         }
     }
 }

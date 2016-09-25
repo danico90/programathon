@@ -11,6 +11,7 @@ class PymeSocialMedias extends Model
     public $linkTwitter;
     public $linkLinkedIn;
     public $linkYoutube;
+    public $linkWebsite;
 
     /**
      * @return array the validation rules.
@@ -19,7 +20,7 @@ class PymeSocialMedias extends Model
     {
         return [
             [['linkFacebook'], 'required'],
-            [['linkFacebook', 'linkTwitter', 'linkLinkedIn', 'linkYoutube'], 'string','max'=> 300],
+            [['linkFacebook', 'linkTwitter', 'linkLinkedIn', 'linkYoutube', 'linkWebsite'], 'string','max'=> 300],
         ];
     }
 
@@ -33,7 +34,7 @@ class PymeSocialMedias extends Model
             'linkTwitter' => 'Dirección de Twitter',
             'linkLinkedIn' => 'Dirección de LinkedIn',
             'linkYoutube' => 'Canal de Youtube',
-            'contactEmailAddress' => 'Correc electrónico del Contacto',
+            'linkWebsite' => 'Website',
         ];
     }
 

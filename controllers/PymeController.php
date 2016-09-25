@@ -73,39 +73,83 @@ class PymeController extends BaseController
         $model = new Pyme;
         $socialModels = new PymeSocialMedias;
         $userModel = new Usuario;
-        
-        $userModel->load(Yii::$app->request->post());
-        $model->load(Yii::$app->request->post());
-        $socialModels->load(Yii::$app->request->post());
 
-        if( $userModel && $model && $socialModels ) {
+        $posted = Yii::$app->request->post();
 
-            if( $userModel->save() ) {
+        if($posted && sizeof($posted) > 0) {
 
-                $model->UsuarioID = $userModel->ID;
-                $model->FechaCreacion = date("Y-m-d H:i:s");
-                $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
-                $model->EsFacebookAppInstalado = 0;
+            $userModel->load($posted);
+            $model->load($posted);
+            $socialModels->load($posted);
+            $userModel->UsuarioEstadoId = $model->EstadoID;
 
-                if($file=UploadedFile::getInstance($model, 'Logo'))
-                {
-                    $this->Logo=file_get_contents($file->tempName);
-                    $this->ExtensionLogo = pathinfo($file->tempName, PATHINFO_EXTENSION);
+            if( $userModel && $model && $socialModels ) {
+
+                if( $userModel->save() ) {
+
+                    $model->UsuarioID = $userModel->ID;
+                    $model->FechaCreacion = date("Y-m-d H:i:s");
+                    $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
+                    $model->EsFacebookAppInstalado = 0;
+
+                    if($file=UploadedFile::getInstance($model, 'Logo'))
+                    {
+                        $model->Logo=file_get_contents($file->tempName);
+                        $model->ExtensionLogo = pathinfo($file->name, PATHINFO_EXTENSION);
+                    }
+                    
+                    if ($model->save(false)) {
+
+                        // Facebook
+                        $Linkfacebook = new RedSocial();
+                        $Linkfacebook->Link = $socialModels->linkFacebook;
+                        $Linkfacebook->PymeID = $model->Id;
+                        $Linkfacebook->TipoRedSocialID = TipoRedSocialID::Facebook;
+                        $Linkfacebook->save();
+
+                        // Twitter
+                        if( $socialModels->linkTwitter ){
+                            $LinkTwitter = new RedSocial();
+                            $LinkTwitter->Link = $socialModels->linkTwitter;
+                            $LinkTwitter->PymeID = $model->Id;
+                            $LinkTwitter->TipoRedSocialID = TipoRedSocialID::Twitter;
+                            $LinkTwitter->save();
+                        }
+
+                        // LinkedIn
+                        if( $socialModels->linkLinkedIn ){
+                            $LinkLinkedIn = new RedSocial();
+                            $LinkLinkedIn->Link = $socialModels->linkLinkedIn;
+                            $LinkLinkedIn->PymeID = $model->Id;
+                            $LinkLinkedIn->TipoRedSocialID = TipoRedSocialID::Linkedin;
+                            $LinkLinkedIn->save();
+                        }
+
+                        // Youtube
+                        if( $socialModels->linkYoutube ){
+                            $LinkYoutube = new RedSocial();
+                            $LinkYoutube->Link = $socialModels->linkYoutube;
+                            $LinkYoutube->PymeID = $model->Id;
+                            $LinkYoutube->TipoRedSocialID = TipoRedSocialID::YouTube;
+                            $LinkYoutube->save();
+                        }
+
+                        // Website
+                        if( $socialModels->linkWebsite ){
+                            $LinkWebsite = new RedSocial();
+                            $LinkWebsite->Link = $socialModels->linkWebsite;
+                            $LinkWebsite->PymeID = $model->Id;
+                            $LinkWebsite->TipoRedSocialID = TipoRedSocialID::Website;
+                            $LinkWebsite->save();
+                        }
+
+                        return $this->redirect(['view', 'id' => $model->Id]);
+                    } 
+
                 }
                 
-
-                if ($model->save()) {
-
-                    $Linkfacebook = new RedSocial();
-                    $Linkfacebook->Link = $socialModels->linkFacebook;
-                    $Linkfacebook->PymeID = $model->Id;
-                    $Linkfacebook->TipoRedSocialID = TipoRedSocialID::Facebook;
-                    $Linkfacebook->save();
-
-                    return $this->redirect(['view', 'id' => $model->Id]);
-                } 
-
             }
+
         }
 
         return $this->render('create', [

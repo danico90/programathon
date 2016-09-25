@@ -39,7 +39,7 @@ else {
             array_unshift_assoc($years, '', '');
         }
 
-        $years[$x] = substr($x, 2, 3);
+        $years[substr($x, 2, 3)] = $x;
     }
 
 
@@ -71,7 +71,7 @@ else {
                 ->dropDownList(['-- Select a country --'])
             ?>
 
-            <?= $form->field($userModel, 'EstadoID')->hiddenInput() ?>
+            
         <?php
         }
         else {
@@ -80,12 +80,12 @@ else {
             <?= $form->field($model, 'EstadoID')
                 ->dropDownList($estadoList)
             ?>
-            <?= $form->field($userModel, 'EstadoID')->hiddenInput() ?>
         <?php
         }
         ?>
+        <?= $form->field($userModel, 'UsuarioEstadoId')->hiddenInput() ?>
 
-    <?= $form->field($model, 'SectorID') ->dropDownList(
+        <?= $form->field($model, 'SectorID') ->dropDownList(
             ArrayHelper::map(Sector::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
             ['prompt'=>'']    // options
         )
@@ -93,8 +93,7 @@ else {
 
     <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
     
-    -- DATE --
-    <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years)->label(''); ?>
+    <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years); ?>
 
     <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
             ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
@@ -118,7 +117,7 @@ else {
     <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
-    
+    <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
     
     <hr>
     <!-- Third Group of questions -->

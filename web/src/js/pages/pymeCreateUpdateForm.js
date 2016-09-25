@@ -8,10 +8,10 @@
     // hidden EstadoID for the user, needed for validation in the model.
     function onEstadoInputChange() {
         
-        $( "select#pyme-estadoid" ).change( function(e) {
+        $( "select#pyme-estadoid" ).change();
 
-            $( "#usuario-estadoid" ).val($(this).val());
-            
+        $( "select#pyme-estadoid" ).change( function(e) {
+            $( "#usuario-usuarioestadoid" ).val($(this).val());
         });
 
     }
