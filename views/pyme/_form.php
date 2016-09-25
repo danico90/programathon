@@ -60,6 +60,9 @@ else {
 
     <?php if(!$pymeIsNew) : ?>
         <?= $form->field($model, 'Id')->hiddenInput() ?>
+        <?= $form->field($model, 'FechaCreacion')->hiddenInput() ?>
+        <?= $form->field($model, 'EsFacebookAppInstalado')->hiddenInput() ?>
+        
     <?php endif; ?>
 
     <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
