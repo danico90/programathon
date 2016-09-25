@@ -38,9 +38,14 @@ class RespuestaController extends Controller
         $searchModel = new RespuestaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'\web\mock\poll.json');
+        $stringFile = file_get_contents(Yii::getAlias('@anyname'));
+        $object = json_decode($stringFile, false);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=> $object
         ]);
     }
 
@@ -63,13 +68,17 @@ class RespuestaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Respuesta();
+        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'\web\mock\poll.json');
+        $stringFile = file_get_contents(Yii::getAlias('@anyname'));
+        $object = json_decode($stringFile, false);
 
+        $model = new Respuesta();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'data'=> $object
             ]);
         }
     }
