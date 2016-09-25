@@ -12,25 +12,30 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
 	<div class="row">
+		<div class="col-md-12">
+			<?php
+			if (!$model->EsFacebookAppInstalado) {
+			?>
+				<button id="share-fb">Compartir en Facebook</button>
+			<?php
+			}
+			?>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-12 company-info">
 			<?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
 			<h2>Panel de Métricas – <?=$model->NombreComercio?> <span class="edit-button"><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span>Editar</a></span></h2>
-			<h3><?= Yii::$app->session->get('user')->username ?></h3>
 		</div>
-	</div>
-	<div class="col-md-12">
-		<?php
-		if (!$model->EsFacebookAppInstalado) {
-		?>
-			<button id="share-fb">Share in facebook</button>
-			<?php
-		}
-			?>
 	</div>
 	<?php $form = ActiveForm::begin(); ?>
 	<?php
 	if (!$model->EsFacebookAppInstalado) {
-		echo '<h4>Comparta el app primero para iniciar la captura de datos.</h4>';
+		echo '<div class="row">
+				<div class="col-sm-12">
+					<h4>Comparta el app primero para iniciar la captura de datos.</h4>
+				</div>
+			</div>';
 	}
 	?>
 	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
@@ -41,7 +46,7 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 			<div class="col-sm-4">
 				<?= $form->field($dashboardModel, 'endDate')->textInput(['class' => 'date-picker']) ?>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-12">
 				<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
@@ -393,11 +398,11 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 	// Create the Doughnut Chart
 	var ageChart = new Chart(ctx,{
 					    type: 'pie',
-					    data: dataGenero
+					    data: dataEdad
 					});
 	var genderChart = new Chart(ctx2,{
 					    type: 'pie',
-					    data: dataEdad
+					    data: dataGenero
 					});
 	var generalChart1 = new Chart(ctx3,{
 					    type: 'pie',
