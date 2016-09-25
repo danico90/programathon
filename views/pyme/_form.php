@@ -50,8 +50,6 @@ else {
     else{
         $returnPage = Url::toRoute(['site/dashboard']);
     }
-     
-
 ?>
 
 <div class="pyme-form">
@@ -68,7 +66,7 @@ else {
     <?php endif; ?>
 
     <div class="row">
-        <div class="col-sm-6" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
             <?= $form->field($paisModel, 'Id')
@@ -105,7 +103,7 @@ else {
             ?>
             
         </div>
-        <div class="col-sm-6" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             
             <?= $form->field($model, 'NumeroTelefono')->textInput(['maxlength' => true]) ?>
 
@@ -125,40 +123,42 @@ else {
             <?php endif;?>
 
         </div>
-    </div>
-    <hr>
-    <!-- Second Group of questions -->
-    <div class="row">
-        <div class="col-sm-6" >
+        <!-- Second Group of questions -->
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+            <h2>Redes Sociales</h2>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
-            </div>
-        <div class="col-sm-6" >
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
         </div>
-    </div>
-    <hr>
-    <!-- Third Group of questions -->
-    <div class="row">
-        <div class="col-sm-6" >
+        <!-- Third Group of questions -->
+         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+            <h2>Usuario</h2>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?php if($pymeIsNew) : ?>
                 <?= $form->field($userModel, 'ID')->hiddenInput() ?>
             <?php endif; ?>
             <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-6" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-6" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
         </div>
+
     </div>
+    <hr>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
