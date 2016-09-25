@@ -28,7 +28,38 @@ class Dashboard extends Model
     {
         return [
             [['startDate', 'endDate'], 'required'],
+            ['startDate', 'validateStartDate'],
+            ['endDate', 'validateEndDate'],
         ];
+    }
+
+    public function validateStartDate($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            print_r($this);
+            if(strtotime($this->startDate) > strtotime($this->endDate)) {
+                $this->addError($attribute, 'La fecha final debe ser mayor o igual que la fecha inicial.');
+            }
+            else {
+                if (strtotime($this->startDate) > strtotime(date('Y-m-d'))) {
+                    $this->addError($attribute, 'La fecha inicial debe ser menor o igual que le fecha inicial');
+                }
+            }
+        }
+    }
+
+    public function validateEndDate($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            if(strtotime($this->endDate) > strtotime($this->endDate)) {
+                $this->addError($attribute, 'La fecha inicial no puede ser mayor que la fecha final.');
+            }
+            else {
+                if (strtotime($this->startDate) > strtotime(date('Y-m-d'))) {
+                    $this->addError($attribute, 'La fecha inicial no puede ser mayor que la fecha actual.');
+                }
+            }
+        }
     }
 
     /**
