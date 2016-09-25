@@ -1,3 +1,6 @@
+
+//Global 
+@import "global/variables";
 // Vendor
 
 // Layout
@@ -13,7 +16,26 @@
 @import "components/radio-group";
 
 // Pages
+@import "pages/login";
 @import "pages/page";
 
 @import "pages/respuesta-create";
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover {
+	background-color: darkcyan;
+}
+h1 {
+	color: red;
+}
+.center {
+	margin: 0 auto;
+	float: none;
+}
+
+@import "pages/_pyme-form"

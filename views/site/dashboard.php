@@ -1,99 +1,77 @@
-<?php
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
-
-$lista = ['', 'Malo', 'Regular', 'Normal', 'Bueno', 'Excelente'];
-$edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
-?>
 <div class="dashboard-container">
-
+<?php
+echo $pymeId;
+?>
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
 	<div class="row">
 		<div class="col-sm-12 company-info">
-			<?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
-			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
+			<img src="" alt="test company">
+			<h2>Panel de Métricas – Test company</h2>
 		</div>
 	</div>
-	<div class="col-md-12">
-			<button id="share-fb">Share in facebook</button>
-	</div>
-	<?php $form = ActiveForm::begin(); ?>
-	<?php
-	if (!$model->EsFacebookAppInstalado) {
-		echo '<h4>Comparta el app primero para iniciar la captura de datos.</h4>';
-	}
-	?>
-	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
 	<div class="row">
 		<div class="col-sm-12 user-info">
-			<h3><?= Yii::$app->session->get('user')->username ?></h3>
+			<h3>test user</h2>
 		</div>
 	</div>
 	<div class="row date-filter">
 		<div class="col-sm-4 ">
-			<?= $form->field($dashboardModel, 'startDate')->textInput(['class' => 'date-picker']) ?>
+			<label>Fecha Inicial</label>
+			<input type="text" class="form-control date-picker" />
 		</div>
 		<div class="col-sm-4">
-			<?= $form->field($dashboardModel, 'endDate')->textInput(['class' => 'date-picker']) ?>
+			<label>Fecha Final</label>
+			<input type="text" class="form-control date-picker" />
 		</div>
-		<div class="col-sm-4">
-		
-		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
-		</div>
-		
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
 	<div class="row result-filter">
-		<div class="col-sm-12 col-md-4 col-md-offset-2 chart-wrapper">
+		<div class="col-sm-12 col-md-6 chart-wrapper text-center">
 			<h3>Datos por Género</h3>
-			<div class="chart-gender">
+			<div class="chart-gender col-sm-8 center">
 				<canvas id="gender-chart" width="100%" height="100%"></canvas>
 			</div>
 		</div>
-		<div class="col-sm-12 col-md-4 chart-wrapper">
-			<h3>Datos por grupos de Edad</h3>
-			<div class="chart-age">
-				<canvas id="age-chart" width="100%" height="100%"></canvas>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Calidad del producto o servicio</h3>
-			<div class="chart-general">
+		<div class="col-sm-12 col-md-6 chart-wrapper text-center">
+			<h3>Datos por Grupos de Edad</h3>
+			<div class="chart-general col-sm-8 center">
 				<canvas id="general-chart-1" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Tiempo de espera en la atención</h3>
-			<div class="chart-general">
+			<h3>Calidad del producto o servicio</h3>
+			<div class="chart-general col-sm-8 center">
 				<canvas id="general-chart-2" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Imagen de las instalaciones</h3>
-			<div class="chart-general">
+			<h3>Tiempo de espera en la atención</h3>
+			<div class="chart-general col-sm-8 center">
 				<canvas id="general-chart-3" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Disponibilidad de producto o servicio solicitado</h3>
-			<div class="chart-general">
+			<h3>Imagen de las instalaciones</h3>
+			<div class="chart-general col-sm-8 center">
 				<canvas id="general-chart-4" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Atención del personal</h3>
-			<div class="chart-general">
+			<h3>Disponibilidad de producto o servicio solicitado</h3>
+			<div class="chart-general col-sm-8 center">
 				<canvas id="general-chart-5" width="100%" height="100%"></canvas>
 			</div>
 		</div>
-		
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Atención del personal</h3>
+			<div class="chart-age col-sm-8 center">
+				<canvas id="age-chart" width="100%" height="100%"></canvas>
+			</div>
+		</div>
 	</div>
-	</div>
-	<?php ActiveForm::end(); ?>
 </div>
 <script type="text/javascript">
 	
@@ -136,219 +114,24 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 
 
 	// Doughnut Chart Data
-	var dataGenero = {
+	var data = {
 	    labels: [
-	        <?php
-			foreach ($dashboardModel->genero['key'] as $item)
-			{
-				echo '"'.$item.'",';
-			}
-			?>
+	        "Red",
+	        "Blue",
+	        "Yellow"
 	    ],
 	    datasets: [
 	        {
-	            data: [<?= implode(',', $dashboardModel->genero['value']) ?>],
+	            data: [80, 60, 40],
 	            backgroundColor: [
 	                "#FF6384",
 	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
+	                "#FFCE56"
 	            ],
 	            hoverBackgroundColor: [
 	                "#FF6384",
 	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var dataEdad = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->edad['key'] as $item)
-			{
-				echo '"'.$edades[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->edad['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var pregunta1 = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->pregunta1['key'] as $item)
-			{
-				echo '"'.$lista[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->pregunta1['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var pregunta2 = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->pregunta2['key'] as $item)
-			{
-				echo '"'.$lista[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->pregunta2['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var pregunta3 = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->pregunta3['key'] as $item)
-			{
-				echo '"'.$lista[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->pregunta3['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var pregunta4 = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->pregunta4['key'] as $item)
-			{
-				echo '"'.$lista[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->pregunta4['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ]
-	        }]
-	};
-
-	var pregunta5 = {
-	    labels: [
-	        <?php
-			foreach ($dashboardModel->pregunta5['key'] as $item)
-			{
-				echo '"'.$lista[$item].'",';
-			}
-			?>
-	    ],
-	    datasets: [
-	        {
-	            data: [<?= implode(',', $dashboardModel->pregunta5['value']) ?>],
-	            backgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
-	            ],
-	            hoverBackgroundColor: [
-	                "#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-					"#EEC826",
-					"#787878",
-					"#EFEFEF"
+	                "#FFCE56"
 	            ]
 	        }]
 	};
@@ -366,43 +149,30 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 	// Create the Doughnut Chart
 	var ageChart = new Chart(ctx,{
 					    type: 'pie',
-					    data: dataGenero
+					    data: data
 					});
 	var genderChart = new Chart(ctx2,{
 					    type: 'pie',
-					    data: dataEdad
+					    data: data
 					});
 	var generalChart1 = new Chart(ctx3,{
 					    type: 'pie',
-					    data: pregunta1
+					    data: data
 					});
 	var generalChart2 = new Chart(ctx4,{
-					    type: 'pie',
-					    data: pregunta2
+					    type: 'bar',
+					    data: data
 					});
 	var generalChart3 = new Chart(ctx5,{
-					    type: 'pie',
-					    data: pregunta3
+					    type: 'polarArea',
+					    data: data
 					});
 	var generalChart4 = new Chart(ctx6,{
 					    type: 'pie',
-					    data: pregunta4
+					    data: data
 					});
 	var generalChart5 = new Chart(ctx7,{
 					    type: 'pie',
-					    data: pregunta5
+					    data: data
 					});
-</script>
-
-<script>
-	$(document).ready(function() {
-		app.initializers.fbSDK.init().then(function() {
-			$('#share-fb').on('click', function() {
-				app.initializers.fbSDK.share(window.location.origin + '/respuesta/create?id=' + <?php echo $pymeId ;?>);
-				$.post( "<?=Yii::$app->urlManager->createUrl('site/activate')?>", function( data ) {
-                  console.log('data', data);
-                });
-			});
-		});
-	});
 </script>
