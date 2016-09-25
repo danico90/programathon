@@ -128,7 +128,7 @@ else {
     <?= $form->field($model, 'EsNegocioFamiliar')->checkbox() ?>
 
     <?php if($pymeIsNew) : ?>
-    
+        <?= $form->field($model, 'Logo')->fileInput() ?>
     <?php else : ?>
         <?= $form->field($model, 'LogoUpdate')->fileInput() ?>
         <?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
