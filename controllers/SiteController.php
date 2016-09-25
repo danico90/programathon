@@ -88,7 +88,10 @@ class SiteController extends BaseController
 
     public function actionDashboard()
     {
-        return $this->render('dashboard');
+
+        return $this->render('dashboard', [
+            'pymeId' => Yii::$app->session->get('pyme')
+        ]);
     }
 
     /**
