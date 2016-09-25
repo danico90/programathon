@@ -9,27 +9,42 @@
     "use strict";
 
     function init() {
+        var elements = $(".verify-continue");
+        elements.unbind("click");
+        setEvent(elements);
+    }
 
-        $(".verify-continue").click(function(e) {
+    function setEvent(jqElements) {
 
-            var message = $(this).attr("data-message");
+        jqElements.click(function(e) {
 
-            // Default message
-            if(!message){
-                message = "¿Desea proseguir?"
+            var self = $(this);
+
+            if( !self.hasClass("verify-continue") ) {
+                
+                self.unbind("click");
+
+            } else {
+
+                var message = self.attr("data-message");
+
+                // Default message
+                if(!message){
+                    message = "¿Desea proseguir?"
+                }
+
+                var confirmation = confirm(message);
+
+                if (confirmation == false) {
+                    return false;
+                }
             }
-
-            var confirmation = confirm(message);
-
-            if (confirmation == false) {
-                return false;
-            } 
-
+            
         });
     }
 
     app.initializers.verifyContinue = {
-        init: init,
+        init: init
     };
 
 })();
