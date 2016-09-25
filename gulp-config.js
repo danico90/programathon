@@ -4,8 +4,8 @@ var config = {
 	},
 
 	watch: {
-		scss: './web/src/scss/**/**',
-		js: './web/src/js/**/**'
+		scss: './web/src/scss/**/*.scss',
+		js: './web/src/js/**/*.js'
 	},
 
 	scss: {
