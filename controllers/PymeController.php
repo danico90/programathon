@@ -226,10 +226,7 @@ class PymeController extends Controller
                 if( $userModel->save() ) {
 
                     $model->UsuarioID = $userModel->ID;
-                    $model->FechaCreacion = date("Y-m-d H:i:s");
                     $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
-                    $model->EsFacebookAppInstalado = 0;
-                    $model->EsActiva = 1;
 
                     if(isset($model->LogoUodate)) {
                         if($file=UploadedFile::getInstance($model, 'LogoUpdate'))
