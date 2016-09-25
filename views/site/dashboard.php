@@ -14,11 +14,18 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 	<div class="row">
 		<div class="col-sm-12 company-info">
 			<?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
-			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
+			<h2>Panel de Métricas – <?=$model->NombreComercio?> <span class="edit-button"><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span>Editar</a></span></h2>
+			<h3><?= Yii::$app->session->get('user')->username ?></h3>
 		</div>
 	</div>
 	<div class="col-md-12">
+		<?php
+		if (!$model->EsFacebookAppInstalado) {
+		?>
 			<button id="share-fb">Share in facebook</button>
+			<?php
+		}
+			?>
 	</div>
 	<?php $form = ActiveForm::begin(); ?>
 	<?php
@@ -27,71 +34,91 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 	}
 	?>
 	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
-	<div class="row">
-		<div class="col-sm-12 user-info">
-			<h3><?= Yii::$app->session->get('user')->username ?></h3>
-		</div>
-	</div>
-	<div class="row date-filter">
-		<div class="col-sm-4 ">
-			<?= $form->field($dashboardModel, 'startDate')->textInput(['class' => 'date-picker']) ?>
-		</div>
-		<div class="col-sm-4">
-			<?= $form->field($dashboardModel, 'endDate')->textInput(['class' => 'date-picker']) ?>
-		</div>
-		<div class="col-sm-4">
-		
-		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
-		</div>
-		
-		<div class="col-xs-12"><div class="divider-border"></div></div>
-	</div>
-	<div class="row result-filter">
-		<div class="col-sm-12 col-md-4 col-md-offset-2 chart-wrapper">
-			<h3>Datos por Género</h3>
-			<div class="chart-gender">
-				<canvas id="gender-chart" width="100%" height="100%"></canvas>
+		<div class="row date-filter">
+			<div class="col-sm-4">
+				<?= $form->field($dashboardModel, 'startDate')->textInput(['class' => 'date-picker']) ?>
+			</div>
+			<div class="col-sm-4">
+				<?= $form->field($dashboardModel, 'endDate')->textInput(['class' => 'date-picker']) ?>
+			</div>
+			<div class="col-sm-4">
+				<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
-		<div class="col-sm-12 col-md-4 chart-wrapper">
-			<h3>Datos por grupos de Edad</h3>
-			<div class="chart-age">
-				<canvas id="age-chart" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<h3>Datos por Género</h3>
+				<div class="chart-gender">
+					<canvas id="gender-chart" width="100%" height="100%"></canvas>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<h3>Datos por grupos de Edad</h3>
+				<div class="chart-age">
+					<canvas id="age-chart" width="100%" height="100%"></canvas>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Calidad del producto o servicio</h3>
-			<div class="chart-general">
-				<canvas id="general-chart-1" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<div class="chart-general">
+					<canvas id="general-chart-1" width="100%" height="100%"></canvas>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<article>
+					<h4>Calidad del producto o servicio</h4>
+				</article>
 			</div>
 		</div>
-		<div class="col-xs-12"><div class="divider-border"></div></div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Tiempo de espera en la atención</h3>
-			<div class="chart-general">
-				<canvas id="general-chart-2" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<article>
+					<h4>Imagen de las instalaciones</h4>
+				</article>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<div class="chart-general">
+					<canvas id="general-chart-3" width="100%" height="100%"></canvas>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Imagen de las instalaciones</h3>
-			<div class="chart-general">
-				<canvas id="general-chart-3" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<div class="chart-general">
+					<canvas id="general-chart-2" width="100%" height="100%"></canvas>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<article>
+					<h4>Tiempo de espera en la atención</h4>
+				</article>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Disponibilidad de producto o servicio solicitado</h3>
-			<div class="chart-general">
-				<canvas id="general-chart-4" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<article>
+					<h4>Disponibilidad de producto o servicio solicitado</h4>
+				</article>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<div class="chart-general">
+					<canvas id="general-chart-4" width="100%" height="100%"></canvas>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Atención del personal</h3>
-			<div class="chart-general">
-				<canvas id="general-chart-5" width="100%" height="100%"></canvas>
+		<div class="row result-filter">
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<div class="chart-general">
+					<canvas id="general-chart-5" width="100%" height="100%"></canvas>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 chart-wrapper">
+				<article>
+					<h4>Atención del personal</h4>
+				</article>
 			</div>
 		</div>
-		
-	</div>
 	</div>
 	<?php ActiveForm::end(); ?>
 </div>

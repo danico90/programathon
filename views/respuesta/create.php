@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = 'Encuesta';
 ?>
-<div class="respuesta-create">
+<div class="respuesta-create animated">
 
     <?php if (Yii::$app->session->hasFlash('pollFormSubmitted')): ?>
 
@@ -29,12 +29,9 @@ $this->title = 'Encuesta';
 
 <script>
 $(document).ready(function() {
-
-		app.initializers.fbSDK.init().then(function() {
-			
-		});
-		console.log('check state');
-
+	app.initializers.fbSDK.init().then(function() {
+		
+	});
 });
 	
 </script>

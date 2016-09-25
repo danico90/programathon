@@ -56,5 +56,6 @@ $model->PymeID = $pymeID;
 <script>
     $(document).on('ready', function() {
         $('.wrap').addClass('respuesta-create-container');
+        $('.animated').addClass('fadeIn');
     });
 </script>
