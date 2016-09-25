@@ -8,6 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Pyme;
+use app\models\Dashboard;
+use app\models\Respuesta;
 
 class SiteController extends BaseController
 {
@@ -61,7 +64,7 @@ class SiteController extends BaseController
     public function actionIndex()
     {
         if (Yii::$app->session->get('user')) {
-            return $this->redirect('/site/dashboard');
+            return $this->redirect('/site/answersboard');
         }
         else {
             return $this->redirect('/site/login');
@@ -79,18 +82,48 @@ class SiteController extends BaseController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('/site/dashboard');
+            return $this->redirect('/site/answersboard');
         }
         return $this->render('login', [
             'model' => $model,
         ]);
     }
 
-    public function actionDashboard()
+    public function actionPymeImage($id)
     {
 
+        header('Content-Type: image/' . $model->ExtensionLogo);
+
+        $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
+
+        print $model->Logo;
+
+        exit();
+
+    }
+
+    public function actionDashboard()
+    {
+        $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
+
+        $dashboardModel = new Dashboard;
+
+        if (!$dashboardModel->load(Yii::$app->request->post())) {
+            $dashboardModel->startDate = date('m/d/Y');
+            $dashboardModel->endDate = date('m/d/Y');
+        }
+
+        $dashboardModel->genero = Respuesta::find()
+                    ->select(['COUNT(*)'])
+                    ->all();
+        //print_r($dashboardModel->genero);
+
+        
+
         return $this->render('dashboard', [
-            'pymeId' => Yii::$app->session->get('pyme')
+            'pymeId' => Yii::$app->session->get('pyme'),
+            'model' => $model,
+            'dashboardModel' => $dashboardModel
         ]);
     }
 

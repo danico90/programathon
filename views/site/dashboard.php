@@ -1,29 +1,38 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+?>
 <div class="dashboard-container">
 <?php
 echo $pymeId;
 ?>
+
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
 	<div class="row">
 		<div class="col-sm-12 company-info">
-			<img src="" alt="test company">
-			<h2>Panel de Métricas – Test company</h2>
+			<?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
+			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
 		</div>
 	</div>
+	<?php $form = ActiveForm::begin(); ?>
 	<div class="row">
 		<div class="col-sm-12 user-info">
-			<h3>test user</h2>
+			<h3><?= Yii::$app->session->get('user')->username ?></h3>
 		</div>
 	</div>
 	<div class="row date-filter">
 		<div class="col-sm-4 ">
-			<label>Fecha Inicial</label>
-			<input type="text" class="form-control date-picker" />
+			<?= $form->field($dashboardModel, 'startDate')->textInput(['class' => 'date-picker']) ?>
 		</div>
 		<div class="col-sm-4">
-			<label>Fecha Final</label>
-			<input type="text" class="form-control date-picker" />
+			<?= $form->field($dashboardModel, 'endDate')->textInput(['class' => 'date-picker']) ?>
+		</div>
+		<div class="col-sm-4">
+		
+		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
 		</div>
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
@@ -72,6 +81,7 @@ echo $pymeId;
 			</div>
 		</div>
 	</div>
+	<?php ActiveForm::end(); ?>
 </div>
 <script type="text/javascript">
 	
