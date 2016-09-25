@@ -18,12 +18,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css',
         'css/site.css',
         'dist/css/app.css',
     ];
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js',
         'dist/js/app.js'
     ];
     public $depends = [

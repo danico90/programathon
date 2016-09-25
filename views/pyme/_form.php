@@ -72,7 +72,7 @@ else {
     <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
     
     -- DATE --
-    <?= $form->field($model, 'AnnoInicioOperaciones')->textInput() ?>
+    <?= $form->field($model, 'AnnoInicioOperaciones')->textInput(['class' => 'date-picker']) ?>
 
     <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
             ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
