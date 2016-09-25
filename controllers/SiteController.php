@@ -63,7 +63,9 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        
         if (Yii::$app->session->get('user')) {
+            
             return $this->redirect('/site/dashboard');
         }
         else {
@@ -79,7 +81,6 @@ class SiteController extends BaseController
      */
     public function actionLogin()
     {
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect('/site/dashboard');
@@ -104,6 +105,9 @@ class SiteController extends BaseController
 
     public function actionDashboard()
     {
+        if (!Yii::$app->session->get('user')) {
+            return $this->redirect('/site/login');
+        }
         $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
 
         $dashboardModel = new Dashboard;
