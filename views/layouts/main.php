@@ -22,54 +22,56 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+    <div class="wrapper">
+        <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'La Voz del Cliente',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            !Yii::$app->session->get('user') ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->session->get('user')->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            ),
-            !Yii::$app->user->isGuest ? (['label' => 'User', 'url' => ['/app-user/index']]) : ('')
-        ],
-    ]);
-    NavBar::end();
-    ?>
+        <div class="wrap">
+            <?php
+            NavBar::begin([
+                'brandLabel' => 'La Voz del Cliente',
+                'brandUrl' => Yii::$app->homeUrl,
+                'options' => [
+                    'class' => 'navbar-inverse navbar-fixed-top',
+                ],
+            ]);
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => [
+                    !Yii::$app->session->get('user') ? (
+                        ['label' => 'Login', 'url' => ['/site/login']]
+                    ) : (
+                        '<li>'
+                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                        . Html::submitButton(
+                            'Logout (' . Yii::$app->session->get('user')->username . ')',
+                            ['class' => 'btn btn-link']
+                        )
+                        . Html::endForm()
+                        . '</li>'
+                    ),
+                    !Yii::$app->user->isGuest ? (['label' => 'User', 'url' => ['/app-user/index']]) : ('')
+                ],
+            ]);
+            NavBar::end();
+            ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+            <div class="container">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= $content ?>
+            </div>
+        </div>
+
+<!--         <footer class="footer">
+            <div class="container">
+                <p class="pull-left">&copy; FUNDES <?= date('Y') ?></p>
+
+            </div>
+        </footer> -->
+
+        <?php $this->endBody() ?>
     </div>
-</div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; FUNDES <?= date('Y') ?></p>
-
-    </div>
-</footer>
-
-<?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
