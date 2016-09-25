@@ -67,6 +67,7 @@ class SiteController extends BaseController
             return $this->redirect('/site/dashboard');
         }
         else {
+            $this->layout = 'login';
             return $this->redirect('/site/login');
         }
 
@@ -79,7 +80,7 @@ class SiteController extends BaseController
      */
     public function actionLogin()
     {
-
+        $this->layout = 'login';
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect('/site/dashboard');
