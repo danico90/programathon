@@ -20,6 +20,12 @@ use yii\widgets\ActiveForm;
 			<button id="share-fb">Share in facebook</button>
 	</div>
 	<?php $form = ActiveForm::begin(); ?>
+	<?php
+	if (!$model->EsFacebookAppInstalado) {
+		echo '<h2>Comparta el app primero para iniciar la captura de datos.</h2>';
+	}
+	?>
+	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
 	<div class="row">
 		<div class="col-sm-12 user-info">
 			<h3><?= Yii::$app->session->get('user')->username ?></h3>
@@ -84,6 +90,7 @@ use yii\widgets\ActiveForm;
 			</div>
 		</div>
 		
+	</div>
 	</div>
 	<?php ActiveForm::end(); ?>
 </div>
