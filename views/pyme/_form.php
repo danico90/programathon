@@ -23,6 +23,12 @@ else {
     $paisModel = new Pais;
     $estadoList = [];
 }
+    $years = array();
+    $curYear = date("Y");
+    $start = 1900;
+    for ($x = $start; $x < $curYear + 1; $x++) {
+        $years[$x] = $x;
+    }
 
 ?>
 
@@ -75,7 +81,7 @@ else {
     <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
     
     -- DATE --
-    <?= $form->field($model, 'AnnoInicioOperaciones')->textInput() ?>
+    <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years)->label(''); ?>
 
     <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
             ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')

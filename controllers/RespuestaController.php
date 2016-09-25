@@ -8,7 +8,7 @@ use app\models\RespuestaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use DateTime;
 /**
  * RespuestaController implements the CRUD actions for Respuesta model.
  */
@@ -68,17 +68,20 @@ class RespuestaController extends Controller
      */
     public function actionCreate()
     {
-        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'\web\mock\poll.json');
+        Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'/web/mock/poll.json');
         $stringFile = file_get_contents(Yii::getAlias('@anyname'));
         $object = json_decode($stringFile, false);
-
+        $date = new DateTime();
         $model = new Respuesta();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            Yii::$app->session->setFlash('pollFormSubmitted');
+            return $this->refresh();
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'data'=> $object
+                'data'=> $object,
+                'date'=> $date,
             ]);
         }
     }
