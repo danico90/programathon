@@ -113,18 +113,69 @@ class SiteController extends BaseController
             $dashboardModel->endDate = date('m/d/Y');
         }
 
-        $dashboardModel->genero = Respuesta::find()
-                    ->select(['COUNT(*)'])
-                    ->all();
-        //print_r($dashboardModel->genero);
+        $startDate = date("Y-m-d 00:00:00", strtotime($dashboardModel->startDate));
+        $endDate = date("Y-m-d 23:59:59", strtotime($dashboardModel->endDate));
 
-        
+        $genero = Respuesta::findBySql("select count(*) as cnt, GeneroID
+                                                        from Respuesta
+                                                        where (FechaRespuesta >= '$startDate'
+                                                        and FechaRespuesta <= '$endDate')
+                                                        and PymeID = $model->Id
+                                                        group by GeneroID")
+                                                        ->all();
+
+
+        $edad = Respuesta::findBySql("select count(*) as cnt, RangoEdad
+                                                        from Respuesta
+                                                        where (FechaRespuesta >= '$startDate'
+                                                        and FechaRespuesta <= '$endDate')
+                                                        and PymeID = $model->Id
+                                                        group by RangoEdad")
+                                                        ->all();
+                                                        
+                                                        
+
+        $pregunta1 = $this->queryPregunta(1, $startDate, $endDate, $model->Id);
+        $pregunta2 = $this->queryPregunta(2, $startDate, $endDate, $model->Id);
+        $pregunta3 = $this->queryPregunta(3, $startDate, $endDate, $model->Id);
+        $pregunta4 = $this->queryPregunta(4, $startDate, $endDate, $model->Id);
+        $pregunta5 = $this->queryPregunta(5, $startDate, $endDate, $model->Id); 
+
+        $dashboardModel->genero = $this->serialize($genero, 'GeneroID', 'cnt');
+        $dashboardModel->edad = $this->serialize($edad, 'RangoEdad', 'cnt');
+        $dashboardModel->pregunta1 = $this->serialize($pregunta1, 'Respuesta01', 'cnt');
+        $dashboardModel->pregunta2 = $this->serialize($pregunta2, 'Respuesta02', 'cnt');
+        $dashboardModel->pregunta3 = $this->serialize($pregunta3, 'Respuesta03', 'cnt');
+        $dashboardModel->pregunta4 = $this->serialize($pregunta4, 'Respuesta04', 'cnt');
+        $dashboardModel->pregunta5 = $this->serialize($pregunta5, 'Respuesta05', 'cnt');
 
         return $this->render('dashboard', [
             'pymeId' => Yii::$app->session->get('pyme'),
             'model' => $model,
             'dashboardModel' => $dashboardModel
         ]);
+    }
+
+    private function serialize($model, $key, $value)
+    {
+        $final['key'] = [];
+        $final['value'] = [];
+        foreach ($model as $item) {
+            array_push($final['key'], $item->{$key});
+            array_push($final['value'], $item->{$value});
+        }
+        return $final;
+    }
+
+    private function queryPregunta($pregunta, $startDate, $endDate, $id)
+    {
+        return Respuesta::findBySql("select count(*) as cnt, Respuesta0$pregunta
+                        from Respuesta
+                        where (FechaRespuesta >= '$startDate'
+                        and FechaRespuesta <= '$endDate')
+                        and PymeID = $id
+                        group by Respuesta0$pregunta")
+                        ->all();
     }
 
     /**

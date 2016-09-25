@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+
+
 ?>
 <div class="dashboard-container">
 
@@ -44,42 +46,43 @@ use yii\widgets\ActiveForm;
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-4 chart-wrapper">
-			<h3>Datos por Grupos de Edad</h3>
+			<h3>Datos por grupos de Edad</h3>
+			<div class="chart-age">
+				<canvas id="age-chart" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Calidad del producto o servicio</h3>
 			<div class="chart-general">
 				<canvas id="general-chart-1" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Calidad del producto o servicio</h3>
+			<h3>Tiempo de espera en la atención</h3>
 			<div class="chart-general">
 				<canvas id="general-chart-2" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Tiempo de espera en la atención</h3>
+			<h3>Imagen de las instalaciones</h3>
 			<div class="chart-general">
 				<canvas id="general-chart-3" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Imagen de las instalaciones</h3>
+			<h3>Disponibilidad de producto o servicio solicitado</h3>
 			<div class="chart-general">
 				<canvas id="general-chart-4" width="100%" height="100%"></canvas>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Disponibilidad de producto o servicio solicitado</h3>
+			<h3>Atención del personal</h3>
 			<div class="chart-general">
 				<canvas id="general-chart-5" width="100%" height="100%"></canvas>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
-			<h3>Atención del personal</h3>
-			<div class="chart-age">
-				<canvas id="age-chart" width="100%" height="100%"></canvas>
-			</div>
-		</div>
+		
 	</div>
 	<?php ActiveForm::end(); ?>
 </div>
@@ -124,24 +127,219 @@ use yii\widgets\ActiveForm;
 
 
 	// Doughnut Chart Data
-	var data = {
+	var dataGenero = {
 	    labels: [
-	        "Red",
-	        "Blue",
-	        "Yellow"
+	        <?php
+			foreach ($dashboardModel->genero['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
 	    ],
 	    datasets: [
 	        {
-	            data: [300, 50, 100],
+	            data: [<?= implode(',', $dashboardModel->genero['value']) ?>],
 	            backgroundColor: [
 	                "#FF6384",
 	                "#36A2EB",
-	                "#FFCE56"
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
 	            ],
 	            hoverBackgroundColor: [
 	                "#FF6384",
 	                "#36A2EB",
-	                "#FFCE56"
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var dataEdad = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->edad['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->edad['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var pregunta1 = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->pregunta1['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->pregunta1['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var pregunta2 = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->pregunta2['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->pregunta2['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var pregunta3 = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->pregunta3['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->pregunta3['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var pregunta4 = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->pregunta4['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->pregunta4['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ]
+	        }]
+	};
+
+	var pregunta5 = {
+	    labels: [
+	        <?php
+			foreach ($dashboardModel->pregunta5['key'] as $item)
+			{
+				echo '"'.$item.'",';
+			}
+			?>
+	    ],
+	    datasets: [
+	        {
+	            data: [<?= implode(',', $dashboardModel->pregunta5['value']) ?>],
+	            backgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
+	            ],
+	            hoverBackgroundColor: [
+	                "#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+					"#EEC826",
+					"#787878",
+					"#EFEFEF"
 	            ]
 	        }]
 	};
@@ -159,31 +357,31 @@ use yii\widgets\ActiveForm;
 	// Create the Doughnut Chart
 	var ageChart = new Chart(ctx,{
 					    type: 'pie',
-					    data: data
+					    data: dataGenero
 					});
 	var genderChart = new Chart(ctx2,{
 					    type: 'pie',
-					    data: data
+					    data: dataEdad
 					});
 	var generalChart1 = new Chart(ctx3,{
 					    type: 'pie',
-					    data: data
+					    data: pregunta1
 					});
 	var generalChart2 = new Chart(ctx4,{
 					    type: 'pie',
-					    data: data
+					    data: pregunta2
 					});
 	var generalChart3 = new Chart(ctx5,{
 					    type: 'pie',
-					    data: data
+					    data: pregunta3
 					});
 	var generalChart4 = new Chart(ctx6,{
 					    type: 'pie',
-					    data: data
+					    data: pregunta4
 					});
 	var generalChart5 = new Chart(ctx7,{
 					    type: 'pie',
-					    data: data
+					    data: pregunta5
 					});
 </script>
 
