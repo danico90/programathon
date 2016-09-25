@@ -16,6 +16,9 @@ use yii\widgets\ActiveForm;
 			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
 		</div>
 	</div>
+	<div class="col-md-12">
+			<button id="share-fb">Share in facebook</button>
+	</div>
 	<?php $form = ActiveForm::begin(); ?>
 	<div class="row">
 		<div class="col-sm-12 user-info">
@@ -33,9 +36,7 @@ use yii\widgets\ActiveForm;
 		
 		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
 		</div>
-		<div class="col-md-12">
-			<button id="share-fb">Share in facebook</button>
-		</div>
+		
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
 	<div class="row result-filter">
