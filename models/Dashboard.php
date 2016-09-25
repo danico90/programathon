@@ -36,13 +36,13 @@ class Dashboard extends Model
     public function validateStartDate($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            print_r($this);
+            
             if(strtotime($this->startDate) > strtotime($this->endDate)) {
                 $this->addError($attribute, 'La fecha final debe ser mayor o igual que la fecha inicial.');
             }
             else {
                 if (strtotime($this->startDate) > strtotime(date('Y-m-d'))) {
-                    $this->addError($attribute, 'La fecha inicial debe ser menor o igual que le fecha inicial');
+                    $this->addError($attribute, 'La fecha inicial debe ser menor o igual que le fecha actual.');
                 }
             }
         }

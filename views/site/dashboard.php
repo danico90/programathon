@@ -3,6 +3,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+$lista = ['', 'Malo', 'Regular', 'Normal', 'Bueno', 'Excelente'];
+$edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 ?>
 <div class="dashboard-container">
 
@@ -170,7 +172,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->edad['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$edades[$item].'",';
 			}
 			?>
 	    ],
@@ -201,7 +203,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->pregunta1['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$lista[$item].'",';
 			}
 			?>
 	    ],
@@ -232,7 +234,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->pregunta2['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$lista[$item].'",';
 			}
 			?>
 	    ],
@@ -263,7 +265,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->pregunta3['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$lista[$item].'",';
 			}
 			?>
 	    ],
@@ -294,7 +296,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->pregunta4['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$lista[$item].'",';
 			}
 			?>
 	    ],
@@ -325,7 +327,7 @@ use yii\widgets\ActiveForm;
 	        <?php
 			foreach ($dashboardModel->pregunta5['key'] as $item)
 			{
-				echo '"'.$item.'",';
+				echo '"'.$lista[$item].'",';
 			}
 			?>
 	    ],
