@@ -1,6 +1,6 @@
 [
 	{
-        "id": "1",
+        "id": "Respuesta01",
     	"question": "¿Calidad del producto o servicio?",
         "anwers": [
             {
@@ -26,7 +26,7 @@
         ]
     },
     {
-        "id": "2",
+        "id": "Respuesta02",
     	"question": "¿Tiempo de espera en la atención?",
         "anwers": [
             {
@@ -52,7 +52,7 @@
         ]
     },
     {
-        "id": "3",
+        "id": "Respuesta03",
     	"question": "¿Imagen de las instalaciones?",
         "anwers": [
             {
@@ -78,7 +78,7 @@
         ]
     },
     {
-        "id": "4",
+        "id": "Respuesta04",
     	"question": "¿Disponibilidad de producto o servicio solicitado?",
         "anwers": [
             {
@@ -104,33 +104,33 @@
         ]
     },
     {
-        "id": "5",
+        "id": "Respuesta05",
     	"question": "¿Atención del personal?",
         "anwers": [
             {
+                "name": "Malo",
+                "value": "1"
+            },
+            {
+                "name": "Regular",
+                "value": "2"
+            },
+            {
+                "name": "Normal",
+                "value": "3"
+            },
+            {
+                "name": "Bueno(a)",
+                "value": "4"
+            },
+            {
             	"name": "Excelente",
             	"value": "5"
-            },
-            {
-            	"name": "Bueno(a)",
-            	"value": "4"
-            },
-            {
-            	"name": "Normal",
-            	"value": "4"
-            },
-            {
-            	"name": "Regular",
-            	"value": "2"
-            },
-            {
-            	"name": "Malo",
-            	"value": "1"
             }
         ]
     },
     {
-        "id": "6",
+        "id": "RangoEdad",
     	"question": "¿A qué grupo de edad pertenece?",
         "anwers": [
             {

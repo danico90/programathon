@@ -11,26 +11,27 @@ use yii\widgets\ActiveForm;
 <div class="respuesta-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?php  
+        foreach($data as $question){
+            echo '<div class="question-row row">';
+            echo '<label class="col-sm-4 control-label required" for="respuesta-'.$question->id.'">'.$question->question.'</label>';
+            echo '<div class="anwers-row col-sm-8 radio-group">';
+                foreach($question->anwers as $key=>$anwers){
+                    
+                }
+                foreach($question->anwers as $anwers){
+                    echo '<input type="radio" id="respuesta-'.$question->id.'" name="Respuesta['.$question->id.']" value="'.$anwers->value.'">'.$anwers->name;
+                    echo '</br>';
+                }
+            echo '</div>';
+            echo '<div class="help-block"></div>';
+            echo '</div></br>';
+        } 
+    ?>
 
-    <?= $form->field($model, 'Respuesta01')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta02')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta03')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta04')->textInput() ?>
-
-    <?= $form->field($model, 'Respuesta05')->textInput() ?>
-
-    <?= $form->field($model, 'FechaRespuesta')->textInput() ?>
+    <?= $form->field($model, 'FechaRespuesta')->textInput(['value' => date("F j, Y, g:i a"), 'class' => 'hidden']) ?>
 
     <?= $form->field($model, 'GeneroID')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Campo01')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Campo02')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'RangoEdad')->textInput() ?>
 
     <?= $form->field($model, 'PymeID')->textInput() ?>
 

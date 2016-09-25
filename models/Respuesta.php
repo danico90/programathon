@@ -56,16 +56,16 @@ class Respuesta extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'Respuestas',
-            'Respuesta01' => 'Respuesta01',
-            'Respuesta02' => 'Respuesta02',
-            'Respuesta03' => 'Respuesta03',
-            'Respuesta04' => 'Respuesta04',
-            'Respuesta05' => 'Respuesta05',
-            'FechaRespuesta' => 'Fecha Respuesta',
+            'Respuesta01' => '',
+            'Respuesta02' => '',
+            'Respuesta03' => '',
+            'Respuesta04' => '',
+            'Respuesta05' => '',
+            'FechaRespuesta' => '',
             'GeneroID' => 'Genero',
             'Campo01' => 'Campo01',
             'Campo02' => 'Campo02',
-            'RangoEdad' => 'Rango Edad',
+            'RangoEdad' => '',
             'PymeID' => 'Pyme',
         ];
     }
