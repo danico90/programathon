@@ -1,4 +1,7 @@
 <div class="dashboard-container">
+<?php
+echo $pymeId;
+?>
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
@@ -16,11 +19,11 @@
 	<div class="row date-filter">
 		<div class="col-sm-4 ">
 			<label>Fecha Inicial</label>
-			
+			<input type="text" class="form-control date-picker" />
 		</div>
 		<div class="col-sm-4">
 			<label>Fecha Final</label>
-
+			<input type="text" class="form-control date-picker" />
 		</div>
 		<div class="col-md-12">
 			<button id="share-fb">Share in facebook</button>
