@@ -4,9 +4,6 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 ?>
 <div class="dashboard-container">
-<?php
-echo $pymeId;
-?>
 
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
@@ -33,6 +30,9 @@ echo $pymeId;
 		<div class="col-sm-4">
 		
 		<?= Html::submitButton('Consultar', ['class' => 'btn btn-primary']) ?>
+		</div>
+		<div class="col-md-12">
+			<button id="share-fb">Share in facebook</button>
 		</div>
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
@@ -185,4 +185,14 @@ echo $pymeId;
 					    type: 'pie',
 					    data: data
 					});
+</script>
+
+<script>
+	$(document).ready(function() {
+		app.initializers.fbSDK.init().then(function() {
+			$('#share-fb').on('click', function() {
+				app.initializers.fbSDK.share(window.location.origin + '/respuesta/create?id=' + <?php echo $pymeId ;?>);
+			});
+		});
+	});
 </script>
