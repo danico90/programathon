@@ -85,7 +85,7 @@ class Pyme extends \yii\db\ActiveRecord
             'EsActiva' => 'Es Activa',
             'EsNegocioFamiliar' => 'Es Negocio Familiar',
             'Logo' => 'Logo',
-            'LogoUpdate' => 'Logo Update',
+            'LogoUpdate' => 'Logo',
             'ExtensionLogo' => 'Extension Logo',
             'FechaCreacion' => 'Fecha Creacion',
             'FechaUltimaActualizacion' => 'Fecha Ultima Actualizacion',
