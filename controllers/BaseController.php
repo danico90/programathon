@@ -32,15 +32,14 @@ class BaseController extends Controller
          
         if (Yii::$app->request->pathInfo == 'site/login' || Yii::$app->request->pathInfo == 'pyme/create') {
             if (Yii::$app->session->get('user')) {
-                
                 return $this->redirect('/site/dashboard');
             }
         }
         else {
             
+
             if (!Yii::$app->session->get('user')) {
-                
-                return $this->redirect('/site/login');
+                return $this->redirect('site/login');
             }
         }
         
