@@ -73,15 +73,40 @@ class PymeController extends BaseController
         $socialModels = new PymeSocialMedias();
         $userModel = new Usuario();
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'userModel' => $userModel,
-                'socialModels' => $socialModels,
-            ]);
+        $userModel->load(Yii::$app->request->post());
+        $model->load(Yii::$app->request->post());
+        $socialModels->load(Yii::$app->request->post());
+
+        if( $userModel && $model && $socialModels ) {
+
+            if( $userModel->save() ) {
+
+                $model->UsuarioID = $userModel->ID;
+                $model->Logo = 'asdasdasd';
+                $model->ExtensionLogo = '.png';
+                $model->FechaCreacion = date("Y-m-d H:i:s");
+                $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
+                $model->EsFacebookAppInstalado = 0;
+
+                if ($model->save()) {
+
+                    $Linkfacebook = new RedSocial();
+                    $Linkfacebook->Link = $socialModels->linkFacebook;
+                    $Linkfacebook->PymeID = $model->Id;
+                    $Linkfacebook->TipoRedSocialID = TipoRedSocialID::Facebook;
+                    $Linkfacebook->save();
+
+                    return $this->redirect(['view', 'id' => $model->Id]);
+                } 
+
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'userModel' => $userModel,
+            'socialModels' => $socialModels,
+        ]);
     }
 
     /**

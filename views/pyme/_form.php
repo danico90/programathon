@@ -14,9 +14,10 @@ use app\models\Estado;
 /* @var $form yii\widgets\ActiveForm */
 
 $estadoModel = Estado::findOne(['Id' => $model->EstadoID]);
+
 if ($estadoModel) {
     $paisModel = Pais::findOne(['Id' => $estadoModel->PaisID ]);
-    $estadoList = ArrayHelper::map(Estado::findAll(['PaisID' => $paisModel->Id]));
+    $estadoList = ArrayHelper::map(Estado::findAll(['PaisID' => $paisModel->Id]), 'Id', 'Nombre');
 }
 else {
     $paisModel = new Pais;
@@ -101,8 +102,8 @@ else {
     <!-- Third Group of questions -->
     <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'Clave')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'RepetirClave')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
 
