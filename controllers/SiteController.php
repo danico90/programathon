@@ -64,7 +64,7 @@ class SiteController extends BaseController
     public function actionIndex()
     {
         if (Yii::$app->session->get('user')) {
-            return $this->redirect('/site/answersboard');
+            return $this->redirect('/site/dashboard');
         }
         else {
             return $this->redirect('/site/login');
@@ -107,11 +107,14 @@ class SiteController extends BaseController
         $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
 
         $dashboardModel = new Dashboard;
+        
 
         if (!$dashboardModel->load(Yii::$app->request->post())) {
             $dashboardModel->startDate = date('m/d/Y');
             $dashboardModel->endDate = date('m/d/Y');
         }
+
+        $dashboardModel->validate();
 
         $startDate = date("Y-m-d 00:00:00", strtotime($dashboardModel->startDate));
         $endDate = date("Y-m-d 23:59:59", strtotime($dashboardModel->endDate));
