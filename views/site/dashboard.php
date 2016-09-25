@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-
 ?>
 <div class="dashboard-container">
 
@@ -22,7 +21,7 @@ use yii\widgets\ActiveForm;
 	<?php $form = ActiveForm::begin(); ?>
 	<?php
 	if (!$model->EsFacebookAppInstalado) {
-		echo '<h2>Comparta el app primero para iniciar la captura de datos.</h2>';
+		echo '<h4>Comparta el app primero para iniciar la captura de datos.</h4>';
 	}
 	?>
 	<div class="<?=!$model->EsFacebookAppInstalado ? 'hidden' : ''?>">
@@ -398,6 +397,9 @@ use yii\widgets\ActiveForm;
 		app.initializers.fbSDK.init().then(function() {
 			$('#share-fb').on('click', function() {
 				app.initializers.fbSDK.share(window.location.origin + '/respuesta/create?id=' + <?php echo $pymeId ;?>);
+				$.post( "<?=Yii::$app->urlManager->createUrl('site/activate')?>", function( data ) {
+                  console.log('data', data);
+                });
 			});
 		});
 	});
