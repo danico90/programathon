@@ -38,7 +38,8 @@ class Usuario extends \yii\db\ActiveRecord
             [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
             [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
             [['NombreCompleto'], 'string', 'max' => 100],
-            [['RepetirClave'], 'validatePassword']
+            [['RepetirClave'], 'validatePassword'],
+            [['RepetirEmailContacto'], 'validateEmail']
         ];
     }
 
@@ -54,6 +55,7 @@ class Usuario extends \yii\db\ActiveRecord
             'Clave' => 'Contraseña',
             'RepetirClave' => 'Repetir Contraseña',
             'EmailContacto' => 'Email Contacto',
+            'RepetirEmailContacto' => 'Repetir el Email de Contacto',
         ];
     }
 
@@ -72,6 +74,16 @@ class Usuario extends \yii\db\ActiveRecord
     {
         if($this->Clave != $password) {
             $this->addError($password, 'Las claves no son iguales');
+        }
+    }
+
+    /**
+     * Validates the email. It shoud match when repeating the email.
+     */
+    public function validateEmail($email)
+    {
+        if($this->EmailContacto != $email) {
+            $this->addError($email, 'Las email no son iguales');
         }
     }
 }
