@@ -7,9 +7,7 @@
 
 // Components
 @import "components/radio-group";
+
 // Pages
 @import "pages/page";
-
-h1 {
-	color: red;
-}
+@import "pages/respuesta-create";
