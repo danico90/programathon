@@ -40,7 +40,7 @@ else {
             array_unshift_assoc($years, '', '');
         }
 
-        $years[(int)(substr($x, 2, 3))] = $x;
+        $years[(substr($x, 2, 3))] = $x;
     }
 
     $pymeIsNew = !isset($model->Id);
@@ -50,7 +50,8 @@ else {
     else{
         $returnPage = Url::toRoute(['site/dashboard']);
     }
-     
+
+    sort($years);
 
 ?>
 
@@ -96,7 +97,14 @@ else {
 
             <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
             
+<<<<<<< HEAD
+        ?>
+            <?= $form->field($model, 'EstadoID')
+                ->dropDownList(['-- Seleccione un país --'])
+            ?>
+=======
             <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years); ?>
+>>>>>>> 262cd8597e57e03614580114e49ac97f125937f7
 
             <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
                     ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
