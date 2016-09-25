@@ -19,7 +19,7 @@ use yii\web\UploadedFile;
 /**
  * PymeController implements the CRUD actions for Pyme model.
  */
-class PymeController extends BaseController
+class PymeController extends Controller
 {
     /**
      * @inheritdoc
@@ -178,14 +178,139 @@ class PymeController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $socialModels = new PymeSocialMedias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $redes = RedSocial::find()->where(['PymeID' => $model->Id])->all();
+
+        foreach($redes as $redSocial) {
+
+            switch($redSocial->TipoRedSocialID) {
+                case TipoRedSocialID::Facebook:
+                    $socialModels->linkFacebook = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Twitter:
+                    $socialModels->linkTwitter = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Linkedin:
+                    $socialModels->linkLinkedIn = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::YouTube:
+                    $socialModels->linkYoutube = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Website:
+                    $socialModels->linkWebsite = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::CorreoContacto:
+                    $socialModels->correoContacto = $redSocial->Link;
+                    break; 
+            }
+            
         }
+
+        $userModel = Usuario::findOne(['ID' => $model->UsuarioID]);
+        $userModel->RepetirClave = $userModel->Clave;
+        $userModel->RepetirEmailContacto = $userModel->EmailContacto;
+        $userModel->UsuarioEstadoId = $model->EstadoID;
+
+        $posted = Yii::$app->request->post();
+
+        if ( $posted && sizeof($posted) > 0) {
+
+            $userModel->load($posted);
+            $model->load($posted);
+            $socialModels->load($posted);
+            $userModel->UsuarioEstadoId = $model->EstadoID;
+
+            if( $userModel && $model && $socialModels ) {
+
+                if( $userModel->save() ) {
+
+                    $model->UsuarioID = $userModel->ID;
+                    $model->FechaCreacion = date("Y-m-d H:i:s");
+                    $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
+                    $model->EsFacebookAppInstalado = 0;
+                    $model->EsActiva = 1;
+
+                    if(isset($model->LogoUodate)) {
+                        if($file=UploadedFile::getInstance($model, 'LogoUpdate'))
+                        {
+                            $model->Logo=file_get_contents($file->tempName);
+                            $model->ExtensionLogo = pathinfo($file->name, PATHINFO_EXTENSION);
+                        }
+                    }
+                    else{
+                        $dbModel = $this->findModel($id);
+                        $model->Logo = $dbModel->Logo;
+                        $model->ExtensionLogo = $dbModel->ExtensionLogo;
+                    }
+                    
+                    if ($model->save(false)) {
+
+                        // Facebook
+                        if( isset($socialModels->linkFacebook) ){
+                            $Linkfacebook = $this->getSocialMedia(TipoRedSocialID::Facebook,$model->Id);
+                            $Linkfacebook->Link = $socialModels->linkFacebook;
+                            $Linkfacebook->save();
+                        }
+
+                        // Twitter
+                        if( isset($socialModels->linkTwitter) ){
+                            $LinkTwitter = $this->getSocialMedia(TipoRedSocialID::Twitter,$model->Id);
+                            $LinkTwitter->Link = $socialModels->linkTwitter;
+                            $LinkTwitter->save();
+                        }
+
+                        // LinkedIn
+                        if( isset($socialModels->linkLinkedIn) ){
+                            $LinkLinkedIn = $this->getSocialMedia(TipoRedSocialID::Linkedin,$model->Id);
+                            $LinkLinkedIn->Link = $socialModels->linkLinkedIn;
+                            $LinkLinkedIn->save();
+                        }
+
+                        // Youtube
+                        if( isset($socialModels->linkYoutube) ){
+                            $LinkYoutube = $this->getSocialMedia(TipoRedSocialID::YouTube,$model->Id);
+                            $LinkYoutube->Link = $socialModels->linkYoutube;
+                            $LinkYoutube->save();
+                        }
+
+                        // Website
+                        if( isset($socialModels->linkWebsite) ){
+                            $LinkWebsite = $this->getSocialMedia(TipoRedSocialID::Website,$model->Id);
+                            $LinkWebsite->Link = $socialModels->linkWebsite;
+                            $LinkWebsite->save();
+                        }
+
+                        // Correo Contacto
+                        if( isset($socialModels->correoContacto) ){
+                            $LinkContacto = $this->getSocialMedia(TipoRedSocialID::CorreoContacto,$model->Id);
+                            $LinkContacto->Link = $socialModels->correoContacto;
+                            $LinkContacto->save();
+                        }
+
+                        return $this->redirect(['site/dashboard/', 'success'=> true]);
+                    } 
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+            'userModel' => $userModel,
+            'socialModels' => $socialModels,
+        ]);
+    }
+
+    private function getSocialMedia($tipoID, $pymeID) {
+        $socialMedia = RedSocial::findOne(['TipoRedSocialID' => $tipoID, 'PymeID' => $pymeID]);
+
+        if(!$socialMedia) {
+            $socialMedia = new RedSocial();
+            $socialMedia->PymeID = $pymeID;
+            $socialMedia->TipoRedSocialID = $tipoID;
+        }
+
+        return $socialMedia;
     }
 
     /**
