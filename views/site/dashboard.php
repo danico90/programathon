@@ -1,7 +1,4 @@
 <div class="dashboard-container">
-<?php
-echo $pymeId;
-?>
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
@@ -184,7 +181,7 @@ echo $pymeId;
 	$(document).ready(function() {
 		app.initializers.fbSDK.init().then(function() {
 			$('#share-fb').on('click', function() {
-				app.initializers.fbSDK.share('https://www.google.com/');
+				app.initializers.fbSDK.share(window.location.origin + '/respuesta/create?id=' + <?php echo $pymeId ;?>);
 			});
 		});
 	});

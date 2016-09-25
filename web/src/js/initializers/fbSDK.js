@@ -14,6 +14,7 @@
 		
 		FB.init({
 			appId      : '187524201658172',
+			cookie     : true,
 			xfbml      : true,
 			version    : 'v2.7'
 		});
@@ -25,10 +26,13 @@
 	}
 
 	function share(url) {
+		console.log(url);
+
 		FB.ui({
 			method: 'share',
-			href: url
-		}, function(response){
+			href: url,
+		}, function(response) {
+			console.log('xxx')
 			console.log(response);
 		});
 	}
