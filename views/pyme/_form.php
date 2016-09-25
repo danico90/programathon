@@ -124,7 +124,14 @@ else {
 
     <?= $form->field($model, 'EsNegocioFamiliar')->checkbox() ?>
 
-    <?= $form->field($model, 'Logo')->fileInput() ?>
+    <?php if($pymeIsNew) : ?>
+    
+    <?php else : ?>
+        <?= $form->field($model, 'LogoUpdate')->fileInput() ?>
+        <?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
+    <?php endif;?>
+
+    
 
     <hr>
     <!-- Second Group of questions -->
@@ -137,7 +144,9 @@ else {
     
     <hr>
     <!-- Third Group of questions -->
-    <?= $form->field($userModel, 'ID')->hiddenInput() ?>
+    <?php if($pymeIsNew) : ?>
+        <?= $form->field($userModel, 'ID')->hiddenInput() ?>
+    <?php endif; ?>
     <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>

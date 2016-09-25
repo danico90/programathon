@@ -231,52 +231,59 @@ class PymeController extends Controller
                     $model->EsFacebookAppInstalado = 0;
                     $model->EsActiva = 1;
 
-                    if($file=UploadedFile::getInstance($model, 'Logo'))
-                    {
-                        $model->Logo=file_get_contents($file->tempName);
-                        $model->ExtensionLogo = pathinfo($file->name, PATHINFO_EXTENSION);
+                    if(isset($model->LogoUodate)) {
+                        if($file=UploadedFile::getInstance($model, 'LogoUpdate'))
+                        {
+                            $model->Logo=file_get_contents($file->tempName);
+                            $model->ExtensionLogo = pathinfo($file->name, PATHINFO_EXTENSION);
+                        }
+                    }
+                    else{
+                        $dbModel = $this->findModel($id);
+                        $model->Logo = $dbModel->Logo;
+                        $model->ExtensionLogo = $dbModel->ExtensionLogo;
                     }
                     
                     if ($model->save(false)) {
 
                         // Facebook
-                        $Linkfacebook = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Facebook, 'PymeID' => $model->Id]);
-                        $Linkfacebook->Link = $socialModels->linkFacebook;
-                        $Linkfacebook->PymeID = $model->Id;
-                        $Linkfacebook->TipoRedSocialID = TipoRedSocialID::Facebook;
-                        $Linkfacebook->save();
+                        if( isset($socialModels->linkFacebook) ){
+                            $Linkfacebook = $this->getSocialMedia(TipoRedSocialID::Facebook,$model->Id);
+                            $Linkfacebook->Link = $socialModels->linkFacebook;
+                            $Linkfacebook->save();
+                        }
 
                         // Twitter
-                        if( $socialModels->linkTwitter ){
-                            $LinkTwitter = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Twitter, 'PymeID' => $model->Id]);
+                        if( isset($socialModels->linkTwitter) ){
+                            $LinkTwitter = $this->getSocialMedia(TipoRedSocialID::Twitter,$model->Id);
                             $LinkTwitter->Link = $socialModels->linkTwitter;
                             $LinkTwitter->save();
                         }
 
                         // LinkedIn
-                        if( $socialModels->linkLinkedIn ){
-                            $LinkLinkedIn = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Linkedin, 'PymeID' => $model->Id]);
+                        if( isset($socialModels->linkLinkedIn) ){
+                            $LinkLinkedIn = $this->getSocialMedia(TipoRedSocialID::Linkedin,$model->Id);
                             $LinkLinkedIn->Link = $socialModels->linkLinkedIn;
                             $LinkLinkedIn->save();
                         }
 
                         // Youtube
-                        if( $socialModels->linkYoutube ){
-                            $LinkYoutube = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::YouTube, 'PymeID' => $model->Id]);
+                        if( isset($socialModels->linkYoutube) ){
+                            $LinkYoutube = $this->getSocialMedia(TipoRedSocialID::YouTube,$model->Id);
                             $LinkYoutube->Link = $socialModels->linkYoutube;
                             $LinkYoutube->save();
                         }
 
                         // Website
-                        if( $socialModels->linkWebsite ){
-                            $LinkWebsite = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Website, 'PymeID' => $model->Id]);
+                        if( isset($socialModels->linkWebsite) ){
+                            $LinkWebsite = $this->getSocialMedia(TipoRedSocialID::Website,$model->Id);
                             $LinkWebsite->Link = $socialModels->linkWebsite;
                             $LinkWebsite->save();
                         }
 
                         // Correo Contacto
-                        if( $socialModels->correoContacto ){
-                            $LinkContacto = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::CorreoContacto, 'PymeID' => $model->Id]);
+                        if( isset($socialModels->correoContacto) ){
+                            $LinkContacto = $this->getSocialMedia(TipoRedSocialID::CorreoContacto,$model->Id);
                             $LinkContacto->Link = $socialModels->correoContacto;
                             $LinkContacto->save();
                         }
@@ -292,6 +299,18 @@ class PymeController extends Controller
             'userModel' => $userModel,
             'socialModels' => $socialModels,
         ]);
+    }
+
+    private function getSocialMedia($tipoID, $pymeID) {
+        $socialMedia = RedSocial::findOne(['TipoRedSocialID' => $tipoID, 'PymeID' => $pymeID]);
+
+        if(!$socialMedia) {
+            $socialMedia = new RedSocial();
+            $socialMedia->PymeID = $pymeID;
+            $socialMedia->TipoRedSocialID = $tipoID;
+        }
+
+        return $socialMedia;
     }
 
     /**

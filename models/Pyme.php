@@ -35,6 +35,8 @@ use Yii;
  */
 class Pyme extends \yii\db\ActiveRecord
 {
+    public $LogoUpdate;
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,7 @@ class Pyme extends \yii\db\ActiveRecord
             [['EstadoID', 'SectorID', 'AnnoInicioOperaciones', 'UsuarioID'], 'integer'],
             [['EsActiva', 'EsNegocioFamiliar', 'EsFacebookAppInstalado'], 'boolean'],
             [['Logo'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, gif', 'maxSize' => 50 * 1024, 'tooBig' => 'El tamaño máximo de la imagen es de 50kb.'],
+            [['LogoUpdate'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, gif', 'maxSize' => 50 * 1024, 'tooBig' => 'El tamaño máximo de la imagen es de 50kb.'],
             [['FechaCreacion', 'FechaUltimaActualizacion'], 'safe'],
             [['NombreComercio'], 'string', 'max' => 100],
             [['NumeroTelefono', 'CedJuridica'], 'string', 'max' => 50],
@@ -82,6 +85,7 @@ class Pyme extends \yii\db\ActiveRecord
             'EsActiva' => 'Es Activa',
             'EsNegocioFamiliar' => 'Es Negocio Familiar',
             'Logo' => 'Logo',
+            'LogoUpdate' => 'Logo Update',
             'ExtensionLogo' => 'Extension Logo',
             'FechaCreacion' => 'Fecha Creacion',
             'FechaUltimaActualizacion' => 'Fecha Ultima Actualizacion',
