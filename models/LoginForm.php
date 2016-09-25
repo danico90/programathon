@@ -55,7 +55,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Usuario o clave incorrecto.');
             }
         }
     }
@@ -69,7 +69,7 @@ class LoginForm extends Model
             $userPymes = Pyme::find()->where(['UsuarioID' => $user->id]);
             
             if (!$userPymes || $userPymes->count() == 0) {
-                $this->addError($attribute, 'Incorrect commercial name'); 
+                $this->addError($attribute, 'Nombre comercial incorrecto'); 
             }
             else {
                 $found = 0;
@@ -81,7 +81,7 @@ class LoginForm extends Model
                 }
                 if ($found == 0) {
                     
-                    $this->addError($attribute, 'Incorrect commercial name'); 
+                    $this->addError($attribute, 'Nombre comercial incorrecto'); 
                 }
             }
 
@@ -98,7 +98,7 @@ class LoginForm extends Model
             $userPymes = Pyme::find()->where(['UsuarioID' => $user->id]);
             
             if (!$userPymes || $userPymes->count() == 0) {
-                $this->addError($attribute, 'Incorrect country'); 
+                $this->addError($attribute, 'País incorrecto'); 
             }
             else {
                 $found = 0;
@@ -112,7 +112,7 @@ class LoginForm extends Model
                 }
                 if ($found == 0) {
                     
-                    $this->addError($attribute, 'Incorrect country'); 
+                    $this->addError($attribute, 'País incorrecto'); 
                 }
             }
         }
