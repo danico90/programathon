@@ -15,10 +15,13 @@ use yii\widgets\ActiveForm;
         foreach($data as $question){
             echo '<div class="question-row row">';
             echo '<label class="col-sm-4 control-label required" for="respuesta-'.$question->id.'">'.$question->question.'</label>';
-            echo '<div class="anwers-row col-sm-8">';
-            
+            echo '<div class="anwers-row col-sm-8 radio-group">';
+                foreach($question->anwers as $key=>$anwers){
+                    
+                }
                 foreach($question->anwers as $anwers){
-                   
+                    echo '<input type="radio" id="respuesta-'.$question->id.'" name="Respuesta['.$question->id.']" value="'.$anwers->value.'">'.$anwers->name;
+                    echo '</br>';
                 }
             echo '</div>';
             echo '<div class="help-block"></div>';
@@ -26,15 +29,9 @@ use yii\widgets\ActiveForm;
         } 
     ?>
 
-    <?= $form->field($model, 'FechaRespuesta')->textInput() ?>
+    <?= $form->field($model, 'FechaRespuesta')->textInput(['value' => date("F j, Y, g:i a"), 'class' => 'hidden']) ?>
 
     <?= $form->field($model, 'GeneroID')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Campo01')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Campo02')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'RangoEdad')->textInput() ?>
 
     <?= $form->field($model, 'PymeID')->textInput() ?>
 

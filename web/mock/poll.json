@@ -108,24 +108,24 @@
     	"question": "¿Atención del personal?",
         "anwers": [
             {
+                "name": "Malo",
+                "value": "1"
+            },
+            {
+                "name": "Regular",
+                "value": "2"
+            },
+            {
+                "name": "Normal",
+                "value": "3"
+            },
+            {
+                "name": "Bueno(a)",
+                "value": "4"
+            },
+            {
             	"name": "Excelente",
             	"value": "5"
-            },
-            {
-            	"name": "Bueno(a)",
-            	"value": "4"
-            },
-            {
-            	"name": "Normal",
-            	"value": "4"
-            },
-            {
-            	"name": "Regular",
-            	"value": "2"
-            },
-            {
-            	"name": "Malo",
-            	"value": "1"
             }
         ]
     },
