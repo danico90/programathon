@@ -65,22 +65,35 @@ else {
         
     <?php endif; ?>
 
-    <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
+    
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
+            <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
-    <?= $form->field($paisModel, 'Id')
-        ->dropDownList(
-            ArrayHelper::map(Pais::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
-            ['prompt'=>'',
-            'onchange'=>'
-                $.post( "'.Yii::$app->urlManager->createUrl('pais/item?id=').'"+$(this).val(), function( data ) {
-                  $( "select#pyme-estadoid" ).html( data );
-                });'
-                ]    // options
-        )
-        ?>
+            <?= $form->field($paisModel, 'Id')
+                ->dropDownList(
+                    ArrayHelper::map(Pais::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
+                    ['prompt'=>'',
+                    'onchange'=>'
+                        $.post( "'.Yii::$app->urlManager->createUrl('pais/item?id=').'"+$(this).val(), function( data ) {
+                        $( "select#pyme-estadoid" ).html( data );
+                        });'
+                        ]    // options
+                )
+                ?>
 
-        <?php
-        if (!$estadoModel) {
+            <?php if (!$estadoModel) : ?>
+                <?= $form->field($model, 'EstadoID')->dropDownList(['-- Select a country --']) ?>
+            <?php else : ?>
+                <?= $form->field($model, 'EstadoID')->dropDownList($estadoList)?>
+            <?php endif; ?>
+            
+            <?= $form->field($model, 'SectorID') ->dropDownList(
+                ArrayHelper::map(Sector::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
+                ['prompt'=>'']    // options
+            )?>
+
+            <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
             
         ?>
             <?= $form->field($model, 'EstadoID')
@@ -88,79 +101,61 @@ else {
             ?>
 
             
-        <?php
-        }
-        else {
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
             
-        ?>
-            <?= $form->field($model, 'EstadoID')
-                ->dropDownList($estadoList)
-            ?>
-        <?php
-        }
-        ?>
-        <?= $form->field($userModel, 'UsuarioEstadoId')->hiddenInput() ?>
+            <?= $form->field($model, 'NumeroTelefono')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'SectorID') ->dropDownList(
-            ArrayHelper::map(Sector::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
-            ['prompt'=>'']    // options
-        )
-    ?>
+            <?= $form->field($model, 'Direccion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years); ?>
+            <?php if( !$pymeIsNew ) : ?>
+                <?= $form->field($model, 'EsActiva')->checkbox(['class' => "IsActiveInput"]); ?>
+            <?php endif; ?>
 
-    <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
-            ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
-            ['prompt'=>'']    // options
-        )
-    ?>
-    
-    <?= $form->field($model, 'NumeroTelefono')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'EsNegocioFamiliar')->checkbox() ?>
 
-    <?= $form->field($model, 'Direccion')->textInput(['maxlength' => true]) ?>
+            <?php if($pymeIsNew) : ?>
+                <?= $form->field($model, 'Logo')->fileInput() ?>
+            <?php else : ?>
+                <?= $form->field($model, 'LogoUpdate')->fileInput() ?>
+                <?= '<img class="logo" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
+            <?php endif;?>
 
-    <?php if( !$pymeIsNew ) : ?>
-        <?= $form->field($model, 'EsActiva')->checkbox(['class' => "IsActiveInput"]); ?>
-    <?php endif; ?>
-
-    <?= $form->field($model, 'EsNegocioFamiliar')->checkbox() ?>
-
-    <?php if($pymeIsNew) : ?>
-        <?= $form->field($model, 'Logo')->fileInput() ?>
-    <?php else : ?>
-        <?= $form->field($model, 'LogoUpdate')->fileInput() ?>
-        <?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
-    <?php endif;?>
-
-    
-
-    <hr>
-    <!-- Second Group of questions -->
-    <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
-    
-    <hr>
-    <!-- Third Group of questions -->
-    <?php if($pymeIsNew) : ?>
-        <?= $form->field($userModel, 'ID')->hiddenInput() ?>
-    <?php endif; ?>
-    <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?php echo $returnPage; ?>">Cancelar</a>
-    </div>
+        </div>
+        <!-- Second Group of questions -->
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
+            <h2>Redes Sociales</h2>
+            <hr>
+            <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
+            <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
+        </div>
+        <!-- Third Group of questions -->
+         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
+            <h2>Usuario</h2>
+            <hr>
+            <?php if($pymeIsNew) : ?>
+                <?= $form->field($userModel, 'ID')->hiddenInput() ?>
+            <?php endif; ?>
+            <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
+            <hr>
+            <div class="form-group">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?php echo $returnPage; ?>">Cancelar</a>
+            </div>
+        </div>
 
     <?php ActiveForm::end(); ?>
 
