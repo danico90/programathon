@@ -2,23 +2,24 @@
 	'use strict';
 
 	function init() {
+		var deferred = $.Deferred();
 		$.ajaxSetup({ cache: true });
-		$.getScript('//connect.facebook.net/en_US/sdk.js', fbInit);
+		$.getScript('//connect.facebook.net/en_US/sdk.js', fbInit).then(function() {
+			deferred.resolve();
+		});
+		return deferred.promise();
 	}
 
 	function fbInit() {
 		
 		FB.init({
-			appId      : '1602712763363040',
+			appId      : '354174228256151',
 			xfbml      : true,
-			cookie     : true,
 			version    : 'v2.7'
 		});
-		setTimeout(function() {
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
-		}, 1000);
+		
+		checkLoginState();
+		
 		// Allow an status callback
 		
 	}
