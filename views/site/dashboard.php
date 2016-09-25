@@ -1,7 +1,4 @@
-<?php
-	
-?>
-<div class="container">
+<div class="dashboard-container">
 	<?php if(isset($_GET['success'])) : ?>
 		<div class="alert alert-success" role="alert">Información guardada/actualizada con éxito</div>
 	<?php endif; ?>
@@ -19,12 +16,13 @@
 	<div class="row date-filter">
 		<div class="col-sm-4 ">
 			<label>Fecha Inicial</label>
-
+			
 		</div>
 		<div class="col-sm-4">
 			<label>Fecha Final</label>
 
 		</div>
+		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
 	<div class="row result-filter">
 		<div class="col-sm-12 col-md-4 col-md-offset-2 chart-wrapper">
@@ -35,11 +33,41 @@
 		</div>
 		<div class="col-sm-12 col-md-4 chart-wrapper">
 			<h3>Datos por Grupos de Edad</h3>
+			<div class="chart-general">
+				<canvas id="general-chart-1" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12"><div class="divider-border"></div></div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Calidad del producto o servicio</h3>
+			<div class="chart-general">
+				<canvas id="general-chart-2" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Tiempo de espera en la atención</h3>
+			<div class="chart-general">
+				<canvas id="general-chart-3" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Imagen de las instalaciones</h3>
+			<div class="chart-general">
+				<canvas id="general-chart-4" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Disponibilidad de producto o servicio solicitado</h3>
+			<div class="chart-general">
+				<canvas id="general-chart-5" width="100%" height="100%"></canvas>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 chart-wrapper">
+			<h3>Atención del personal</h3>
 			<div class="chart-age">
 				<canvas id="age-chart" width="100%" height="100%"></canvas>
 			</div>
 		</div>
-		<div class="col-sm-"></div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -110,12 +138,37 @@
 	//Get the context of the Doughnut Chart canvas element we want to select
 	var ctx2 = document.getElementById("gender-chart").getContext("2d");
 
+	var ctx3 = document.getElementById("general-chart-1").getContext("2d");
+	var ctx4 = document.getElementById("general-chart-2").getContext("2d");
+	var ctx5 = document.getElementById("general-chart-3").getContext("2d");
+	var ctx6 = document.getElementById("general-chart-4").getContext("2d");
+	var ctx7 = document.getElementById("general-chart-5").getContext("2d");
 	// Create the Doughnut Chart
 	var ageChart = new Chart(ctx,{
 					    type: 'pie',
 					    data: data
 					});
 	var genderChart = new Chart(ctx2,{
+					    type: 'pie',
+					    data: data
+					});
+	var generalChart1 = new Chart(ctx3,{
+					    type: 'pie',
+					    data: data
+					});
+	var generalChart2 = new Chart(ctx4,{
+					    type: 'pie',
+					    data: data
+					});
+	var generalChart3 = new Chart(ctx5,{
+					    type: 'pie',
+					    data: data
+					});
+	var generalChart4 = new Chart(ctx6,{
+					    type: 'pie',
+					    data: data
+					});
+	var generalChart5 = new Chart(ctx7,{
 					    type: 'pie',
 					    data: data
 					});
