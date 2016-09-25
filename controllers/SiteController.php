@@ -195,11 +195,10 @@ class SiteController extends BaseController
     public function actionActivate()
     {
         $model = Pyme::findOne(['Id' => Yii::$app->session->get('pyme')]);
-        if ($model)
+        if (isset($model))
         {
             $model->EsFacebookAppInstalado = 1;
-            $model->save();
-            echo 'activated';
+            $model->save(false);
         }
     }
 
