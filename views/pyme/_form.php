@@ -34,7 +34,7 @@ else {
 
     $years = array();
     $curYear = date("Y");
-    $start = 1905;
+    $start = 1900;
     for ($x = $start; $x < $curYear + 1; $x++) {
         if ($x==1900) {
             array_unshift_assoc($years, '', '');

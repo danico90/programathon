@@ -228,7 +228,7 @@ class PymeController extends Controller
                     $model->UsuarioID = $userModel->ID;
                     $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
 
-                    if(isset($model->LogoUodate)) {
+                    if(isset($model->LogoUpdate)) {
                         if($file=UploadedFile::getInstance($model, 'LogoUpdate'))
                         {
                             $model->Logo=file_get_contents($file->tempName);
