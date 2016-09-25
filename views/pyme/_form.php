@@ -66,7 +66,7 @@ else {
     <?php endif; ?>
 
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
             <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
             <?= $form->field($paisModel, 'Id')
@@ -103,7 +103,7 @@ else {
             ?>
             
         </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
             
             <?= $form->field($model, 'NumeroTelefono')->textInput(['maxlength' => true]) ?>
 
@@ -124,48 +124,44 @@ else {
 
         </div>
         <!-- Second Group of questions -->
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
             <h2>Redes Sociales</h2>
             <hr>
-        </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
             <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
         </div>
         <!-- Third Group of questions -->
-         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
             <h2>Usuario</h2>
             <hr>
-        </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?php if($pymeIsNew) : ?>
                 <?= $form->field($userModel, 'ID')->hiddenInput() ?>
             <?php endif; ?>
             <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
         </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+            <hr>
+            <div class="form-group">
+                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?php echo $returnPage; ?>">Cancelar</a>
+            </div>
+        </div>
 
     </div>
-    <hr>
+    
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <a class="verify-continue btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?php echo $returnPage; ?>">Cancelar</a>
-    </div>
+    
 
     <?php ActiveForm::end(); ?>
 
