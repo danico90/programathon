@@ -22,6 +22,18 @@ $this->title = 'Encuesta';
 	        'model' => $model,
 	        'data' => $data,
 	        'date' => $date,
+			'pymeID' => $pymeID,
 	    ]) ?>
 	<?php endif; ?>
 </div>
+
+<script>
+$(document).ready(function() {
+	setTimeout(function() {
+		app.initializers.fbSDK.checkLoginState();
+		console.log('check state');
+	}, 1000);
+	
+});
+	
+</script>

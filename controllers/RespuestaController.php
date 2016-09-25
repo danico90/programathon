@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use DateTime;
+use app\models\Pyme;
 /**
  * RespuestaController implements the CRUD actions for Respuesta model.
  */
@@ -66,13 +67,21 @@ class RespuestaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         Yii::setAlias('@anyname', realpath(dirname(__FILE__).'/..').'/web/mock/poll.json');
         $stringFile = file_get_contents(Yii::getAlias('@anyname'));
         $object = json_decode($stringFile, false);
         $date = new DateTime();
         $model = new Respuesta();
+
+        $this->layout = 'simple';
+
+        $pyme = Pyme::findOne(['Id' => $id]);
+
+        if (!$pyme) {
+            throw new \yii\web\HttpException(404, 'No hay encuestas');
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('pollFormSubmitted');
@@ -82,6 +91,7 @@ class RespuestaController extends Controller
                 'model' => $model,
                 'data'=> $object,
                 'date'=> $date,
+                'pymeID' => $id
             ]);
         }
     }

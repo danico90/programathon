@@ -25,6 +25,8 @@ use Yii;
  */
 class Respuesta extends \yii\db\ActiveRecord
 {
+    public $fbID;
+
     /**
      * @inheritdoc
      */

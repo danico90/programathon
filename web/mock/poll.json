@@ -2,164 +2,80 @@
 	{
         "id": "Respuesta01",
     	"question": "¿Calidad del producto o servicio?",
-        "anwers": [
+        "answers": [
             {
-				"name": "Excelente",
-				"value": "5"
-            },
-            {
-				"name": "Bueno(a)",
-				"value": "4"
-            },
-            {
-				"name": "Normal",
-				"value": "4"
-            },
-            {
-				"name": "Regular",
-				"value": "2"
-            },
-            {
-				"name": "Malo(a)",
-				"value": "1"
+                "5": "Excelente",
+                "4": "Bueno",
+                "3": "Normal",
+                "2": "Regular",
+                "1": "Malo(a)"
             }
         ]
     },
     {
         "id": "Respuesta02",
     	"question": "¿Tiempo de espera en la atención?",
-        "anwers": [
+        "answers": [
             {
-            	"name": "Excelente",
-            	"value": "5"
-            },
-            {
-            	"name": "Bueno(a)",
-            	"value": "4"
-            },
-            {
-            	"name": "Normal",
-            	"value": "4"
-            },
-            {
-            	"name": "Regular",
-            	"value": "2"
-            },
-            {
-            	"name": "Malo(a)",
-            	"value": "1"
+                "5": "Excelente",
+                "4": "Bueno",
+                "3": "Normal",
+                "2": "Regular",
+                "1": "Malo(a)"
             }
         ]
     },
     {
         "id": "Respuesta03",
     	"question": "¿Imagen de las instalaciones?",
-        "anwers": [
+        "answers": [
             {
-            	"name": "Excelente",
-            	"value": "5"
-            },
-            {
-            	"name": "Bueno(a)",
-            	"value": "4"
-            },
-            {
-            	"name": "Normal",
-            	"value": "4"
-            },
-            {
-            	"name": "Regular",
-            	"value": "2"
-            },
-            {
-            	"name": "Malo(a)",
-            	"value": "1"
+                "5": "Excelente",
+                "4": "Bueno",
+                "3": "Normal",
+                "2": "Regular",
+                "1": "Malo(a)"
             }
         ]
     },
     {
         "id": "Respuesta04",
     	"question": "¿Disponibilidad de producto o servicio solicitado?",
-        "anwers": [
+        "answers": [
             {
-            	"name": "Excelente",
-            	"value": "5"
-            },
-            {
-            	"name": "Bueno(a)",
-            	"value": "4"
-            },
-            {
-            	"name": "Normal",
-            	"value": "4"
-            },
-            {
-            	"name": "Regular",
-            	"value": "2"
-            },
-            {
-            	"name": "Malo(a)",
-            	"value": "1"
+                "5": "Excelente",
+                "4": "Bueno",
+                "3": "Normal",
+                "2": "Regular",
+                "1": "Malo(a)"
             }
         ]
     },
     {
         "id": "Respuesta05",
     	"question": "¿Atención del personal?",
-        "anwers": [
+        "answers": [
             {
-            	"name": "Excelente",
-            	"value": "5"
-            },
-            {
-                "name": "Bueno(a)",
-                "value": "4"
-            },
-            {
-                "name": "Normal",
-                "value": "3"
-            },
-            {
-                "name": "Regular",
-                "value": "2"
-            },
-            {
-                "name": "Malo(a)",
-                "value": "1"
+                "5": "Excelente",
+                "4": "Bueno",
+                "3": "Normal",
+                "2": "Regular",
+                "1": "Malo(a)"
             }
         ]
     },
     {
         "id": "RangoEdad",
     	"question": "¿A qué grupo de edad pertenece?",
-        "anwers": [
+        "answers": [
             {
-            	"name": "12-17",
-            	"value": "1"
-            },
-            {
-            	"name": "18-33",
-            	"value": "2"
-            },
-            {
-            	"name": "34-45",
-            	"value": "3"
-            },
-            {
-            	"name": "46-55",
-            	"value": "4"
-            },	            
-            {
-            	"name": "56-64",
-            	"value": "5"
-            },
-            {
-            	"name": "65-73",
-            	"value": "6"
-            },
-            {
-            	"name": "74+",
-            	"value": "7"
+            	"1" : "12-17",
+            	"2" : "18-33",
+            	"3" : "34-45",
+            	"4" : "46-55",
+            	"5" : "56-64",
+            	"6" : "65-73",
+            	"7" : "74+"
             }
         ]
     }
