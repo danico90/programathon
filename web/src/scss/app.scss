@@ -1,5 +1,9 @@
 // Vendor
 
+//Layout
+@import "bootstrap-overrides";
+@import "layout";
+
 // Partials
 @import "partials/clearfix";
 
@@ -13,3 +17,4 @@
 @import "pages/respuesta-create";
 @import "pages/dashboard";
 @import "pages/login";
+@import "pages/_pyme-form.scss";

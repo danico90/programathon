@@ -59,13 +59,14 @@ else {
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?php if(!$pymeIsNew) : ?>
-        <?= $form->field($model, 'Id')->hiddenInput() ?>
-        <?= $form->field($model, 'FechaCreacion')->hiddenInput() ?>
-        <?= $form->field($model, 'EsFacebookAppInstalado')->hiddenInput() ?>
-        
+        <div class="hidden">
+            <?= $form->field($model, 'Id')->hiddenInput() ?>
+            <?= $form->field($model, 'FechaCreacion')->hiddenInput() ?>
+            <?= $form->field($model, 'EsFacebookAppInstalado')->hiddenInput() ?>
+            <?= $form->field($userModel, 'UsuarioEstadoId')->hiddenInput() ?>
+        </div>
     <?php endif; ?>
 
-    
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
             <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
@@ -95,11 +96,13 @@ else {
 
             <?= $form->field($model, 'CedJuridica')->textInput(['maxlength' => true]) ?>
             
-        ?>
-            <?= $form->field($model, 'EstadoID')
-                ->dropDownList(['-- Select a country --'])
-            ?>
+            <?= $form->field($model, 'AnnoInicioOperaciones')->dropDownList($years); ?>
 
+            <?= $form->field($model, 'GeneroPropietarioID')-> dropDownList(
+                    ArrayHelper::map(Genero::find()->all(), 'Id', 'Nombre'),           // Flat array ('id'=>'label')
+                    ['prompt'=>'']    // options
+                )
+            ?>
             
         </div>
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig pyme-form-section" >
@@ -118,7 +121,7 @@ else {
                 <?= $form->field($model, 'Logo')->fileInput() ?>
             <?php else : ?>
                 <?= $form->field($model, 'LogoUpdate')->fileInput() ?>
-                <?= '<img class="logo" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
+                <?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>
             <?php endif;?>
 
         </div>
@@ -157,10 +160,11 @@ else {
             </div>
         </div>
 
+    </div>
+
     <?php ActiveForm::end(); ?>
 
 </div>
-
 <script>
     $(document).ready(function($) {
         app.templates.pymeCreateUpdateForm.init();

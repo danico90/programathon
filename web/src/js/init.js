@@ -10,5 +10,8 @@
 		
 		// Adds the cancel button event.
 		app.initializers.verifyContinue.init();
+
+		// WOW
+		new WOW().init();
 	});
 })();
