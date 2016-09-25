@@ -69,9 +69,9 @@ class PymeController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new Pyme();
-        $socialModels = new PymeSocialMedias();
-        $userModel = new Usuario();
+        $model = new Pyme;
+        $socialModels = new PymeSocialMedias;
+        $userModel = new Usuario;
         
         $userModel->load(Yii::$app->request->post());
         $model->load(Yii::$app->request->post());
@@ -82,11 +82,16 @@ class PymeController extends BaseController
             if( $userModel->save() ) {
 
                 $model->UsuarioID = $userModel->ID;
-                $model->Logo = 'asdasdasd';
-                $model->ExtensionLogo = '.png';
                 $model->FechaCreacion = date("Y-m-d H:i:s");
                 $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
                 $model->EsFacebookAppInstalado = 0;
+
+                if($file=CUploadedFile::getInstance($this,'Logo'))
+                {
+                    $this->Logo=file_get_contents($file->tempName);
+                    $this->ExtensionLogo = pathinfo($file->tempName, PATHINFO_EXTENSION);
+                }
+                
 
                 if ($model->save()) {
 
