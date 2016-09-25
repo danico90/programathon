@@ -66,7 +66,7 @@ else {
     <?php endif; ?>
 
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
             <?= $form->field($paisModel, 'Id')
@@ -103,7 +103,7 @@ else {
             ?>
             
         </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             
             <?= $form->field($model, 'NumeroTelefono')->textInput(['maxlength' => true]) ?>
 
@@ -124,20 +124,20 @@ else {
 
         </div>
         <!-- Second Group of questions -->
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             <h2>Redes Sociales</h2>
             <hr>
             <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'linkWebsite')->textInput(['maxlength' => true]) ?>
             <?= $form->field($socialModels, 'correoContacto')->textInput(['maxlength' => true]) ?>
         </div>
         <!-- Third Group of questions -->
-         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             <h2>Usuario</h2>
             <hr>
             <?php if($pymeIsNew) : ?>
@@ -150,7 +150,7 @@ else {
             <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
             <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow slideInUp" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wow fadeInUpBig" >
             <hr>
             <div class="form-group">
                 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['data-message'=> "¿Desea desactivar la PYME?" ,'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
