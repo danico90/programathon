@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js',
         'dist/js/app.js'
     ];
     public $depends = [
