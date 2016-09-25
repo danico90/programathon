@@ -40,7 +40,7 @@ else {
             array_unshift_assoc($years, '', '');
         }
 
-        $years[(int)(substr($x, 2, 3))] = $x;
+        $years[(substr($x, 2, 3))] = $x;
     }
 
     $pymeIsNew = !isset($model->Id);
@@ -50,7 +50,8 @@ else {
     else{
         $returnPage = Url::toRoute(['site/dashboard']);
     }
-     
+
+    sort($years);
 
 ?>
 
@@ -84,7 +85,7 @@ else {
             
         ?>
             <?= $form->field($model, 'EstadoID')
-                ->dropDownList(['-- Select a country --'])
+                ->dropDownList(['-- Seleccione un país --'])
             ?>
 
             
