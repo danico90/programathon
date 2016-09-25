@@ -40,10 +40,13 @@ class Usuario extends \yii\db\ActiveRecord
             [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
             [['Usuario', 'Clave', 'EmailContacto', 'RepetirEmailContacto', 'NombreCompleto'], 'string', 'max' => 50],
             [['Clave', 'RepetirClave'], 'string', 'min' => 8, 'max' => 10],
-            [['RepetirClave'], 'validatePassword'],
-            [['RepetirEmailContacto'], 'validateEmail'],
             [['Usuario'], 'validateUniqeUserName'],
-            [['EmailContacto', 'RepetirEmailContacto'], 'email']
+            [['EmailContacto', 'RepetirEmailContacto'], 'email'],
+            ['RepetirClave', 'compare', 'compareAttribute'=>'Clave', 'message'=>"Las claves no son iguales"], 
+            ['Clave', 'compare', 'compareAttribute'=>'RepetirClave', 'message'=>"Las claves no son iguales"],
+            ['RepetirEmailContacto', 'compare', 'compareAttribute'=>'EmailContacto', 'message'=>"Las email no son iguales"],
+            ['EmailContacto', 'compare', 'compareAttribute'=>'RepetirEmailContacto', 'message'=>"Las email no son iguales"],
+            
         ];
     }
 
