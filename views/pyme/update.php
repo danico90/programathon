@@ -11,8 +11,13 @@ $this->title = 'Update Pyme: ' . $model->Id;
 
 ?>
 <div class="pyme-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div clas="row" >
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
+            <h1><?= Html::encode($this->title) ?></h1>
+            <hr>
+        </div>
+    </div>
+    
 
     <?= $this->render('_form', [
         'model' => $model,
