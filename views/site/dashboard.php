@@ -22,6 +22,9 @@
 			<label>Fecha Final</label>
 
 		</div>
+		<div class="col-md-12">
+			<button id="share-fb">Share in facebook</button>
+		</div>
 		<div class="col-xs-12"><div class="divider-border"></div></div>
 	</div>
 	<div class="row result-filter">
@@ -172,4 +175,14 @@
 					    type: 'pie',
 					    data: data
 					});
+</script>
+
+<script>
+	$(document).ready(function() {
+		app.initializers.fbSDK.init().then(function() {
+			$('#share-fb').on('click', function() {
+				app.initializers.fbSDK.share('https://www.google.com/');
+			});
+		});
+	});
 </script>

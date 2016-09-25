@@ -13,7 +13,7 @@
 	function fbInit() {
 		
 		FB.init({
-			appId      : '354174228256151',
+			appId      : '187524201658172',
 			xfbml      : true,
 			version    : 'v2.7'
 		});
@@ -22,6 +22,15 @@
 		
 		// Allow an status callback
 		
+	}
+
+	function share(url) {
+		FB.ui({
+			method: 'share',
+			href: url
+		}, function(response){
+			console.log(response);
+		});
 	}
 
 	function checkLoginState() {
@@ -59,6 +68,7 @@
 
 	app.initializers.fbSDK = {
 		init: init,
-		checkLoginState: checkLoginState
+		checkLoginState: checkLoginState,
+		share: share
 	};
 })($);
