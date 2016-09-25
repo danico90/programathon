@@ -10,10 +10,18 @@ $this->title = 'Encuesta';
 ?>
 <div class="respuesta-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_form', [
-        'model' => $model,
-        'data' => $data,
-    ]) ?>
+    <?php if (Yii::$app->session->hasFlash('pollFormSubmitted')): ?>
 
+        <div class="alert alert-success">
+            Encuesta enviada exitosamente, gracias.
+        </div>
+
+    <?php else: ?>
+    	<h1><?= Html::encode($this->title) ?></h1>
+		<?= $this->render('_form', [
+	        'model' => $model,
+	        'data' => $data,
+	        'date' => $date,
+	    ]) ?>
+	<?php endif; ?>
 </div>

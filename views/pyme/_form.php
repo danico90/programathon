@@ -70,6 +70,8 @@ else {
             <?= $form->field($model, 'EstadoID')
                 ->dropDownList(['-- Select a country --'])
             ?>
+
+            <?= $form->field($userModel, 'EstadoID')->hiddenInput() ?>
         <?php
         }
         else {
@@ -78,6 +80,7 @@ else {
             <?= $form->field($model, 'EstadoID')
                 ->dropDownList($estadoList)
             ?>
+            <?= $form->field($userModel, 'EstadoID')->hiddenInput() ?>
         <?php
         }
         ?>
@@ -115,7 +118,7 @@ else {
     <?= $form->field($socialModels, 'linkTwitter')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkLinkedIn')->textInput(['maxlength' => true]) ?>
     <?= $form->field($socialModels, 'linkYoutube')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
+    
     
     <hr>
     <!-- Third Group of questions -->
@@ -133,3 +136,9 @@ else {
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script>
+    $(document).ready(function($) {
+        app.templates.pymeCreateUpdateForm.init();
+    });
+</script>

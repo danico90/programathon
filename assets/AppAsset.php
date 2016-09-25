@@ -17,6 +17,9 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public $jsOptions = array(
+       'position' => \yii\web\View::POS_HEAD
+    );
     public $css = [
         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css',
         'css/site.css',
