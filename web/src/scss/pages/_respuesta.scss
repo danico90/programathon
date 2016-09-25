@@ -1,0 +1,26 @@
+.respuesta-create-container {
+	background-color: #7cbbe8;
+}
+
+.respuesta-create {
+	padding: 20px 40px;
+	background-color: #fff;
+
+	.form-group {
+		.control-label {
+			font-size: 20px;
+			margin-bottom: 15px;
+		}
+
+		.radio-group {
+			label {
+				padding-left: 40px;
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	h1 {
+		margin-bottom: 25px;
+	}
+}
