@@ -7,11 +7,22 @@ use Yii;
 
 class PymeSocialMedias extends Model
 {
+    public $linkFacebookID;
     public $linkFacebook;
+    
+    public $linkTwitterID;
     public $linkTwitter;
+    
+    public $linkLinkedInID;
     public $linkLinkedIn;
+    
+    public $linkYoutubeID;
     public $linkYoutube;
+    
+    public $linkWebsiteID;
     public $linkWebsite;
+    
+    public $correoContactoID;
     public $correoContacto;
 
     /**

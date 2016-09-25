@@ -34,13 +34,13 @@ else {
 
     $years = array();
     $curYear = date("Y");
-    $start = 1900;
+    $start = 1905;
     for ($x = $start; $x < $curYear + 1; $x++) {
         if ($x==1900) {
             array_unshift_assoc($years, '', '');
         }
 
-        $years[substr($x, 2, 3)] = $x;
+        $years[(int)(substr($x, 2, 3))] = $x;
     }
 
     $pymeIsNew = !isset($model->Id);
@@ -57,6 +57,10 @@ else {
 <div class="pyme-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
+    <?php if(!$pymeIsNew) : ?>
+        <?= $form->field($model, 'Id')->hiddenInput() ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'NombreComercio')->textInput(['maxlength' => true, 'disabled' => !$pymeIsNew ]) ?>
 
@@ -133,6 +137,7 @@ else {
     
     <hr>
     <!-- Third Group of questions -->
+    <?= $form->field($userModel, 'ID')->hiddenInput() ?>
     <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>

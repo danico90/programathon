@@ -19,7 +19,7 @@ use yii\web\UploadedFile;
 /**
  * PymeController implements the CRUD actions for Pyme model.
  */
-class PymeController extends BaseController
+class PymeController extends Controller
 {
     /**
      * @inheritdoc
@@ -178,14 +178,120 @@ class PymeController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $socialModels = new PymeSocialMedias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->Id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $redes = RedSocial::find()->where(['PymeID' => $model->Id])->all();
+
+        foreach($redes as $redSocial) {
+
+            switch($redSocial->TipoRedSocialID) {
+                case TipoRedSocialID::Facebook:
+                    $socialModels->linkFacebook = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Twitter:
+                    $socialModels->linkTwitter = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Linkedin:
+                    $socialModels->linkLinkedIn = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::YouTube:
+                    $socialModels->linkYoutube = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::Website:
+                    $socialModels->linkWebsite = $redSocial->Link;
+                    break; 
+                case TipoRedSocialID::CorreoContacto:
+                    $socialModels->correoContacto = $redSocial->Link;
+                    break; 
+            }
+            
         }
+
+        $userModel = Usuario::findOne(['ID' => $model->UsuarioID]);
+        $userModel->RepetirClave = $userModel->Clave;
+        $userModel->RepetirEmailContacto = $userModel->EmailContacto;
+        $userModel->UsuarioEstadoId = $model->EstadoID;
+
+        $posted = Yii::$app->request->post();
+
+        if ( $posted && sizeof($posted) > 0) {
+
+            $userModel->load($posted);
+            $model->load($posted);
+            $socialModels->load($posted);
+            $userModel->UsuarioEstadoId = $model->EstadoID;
+
+            if( $userModel && $model && $socialModels ) {
+
+                if( $userModel->save() ) {
+
+                    $model->UsuarioID = $userModel->ID;
+                    $model->FechaCreacion = date("Y-m-d H:i:s");
+                    $model->FechaUltimaActualizacion = date("Y-m-d H:i:s");
+                    $model->EsFacebookAppInstalado = 0;
+                    $model->EsActiva = 1;
+
+                    if($file=UploadedFile::getInstance($model, 'Logo'))
+                    {
+                        $model->Logo=file_get_contents($file->tempName);
+                        $model->ExtensionLogo = pathinfo($file->name, PATHINFO_EXTENSION);
+                    }
+                    
+                    if ($model->save(false)) {
+
+                        // Facebook
+                        $Linkfacebook = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Facebook, 'PymeID' => $model->Id]);
+                        $Linkfacebook->Link = $socialModels->linkFacebook;
+                        $Linkfacebook->PymeID = $model->Id;
+                        $Linkfacebook->TipoRedSocialID = TipoRedSocialID::Facebook;
+                        $Linkfacebook->save();
+
+                        // Twitter
+                        if( $socialModels->linkTwitter ){
+                            $LinkTwitter = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Twitter, 'PymeID' => $model->Id]);
+                            $LinkTwitter->Link = $socialModels->linkTwitter;
+                            $LinkTwitter->save();
+                        }
+
+                        // LinkedIn
+                        if( $socialModels->linkLinkedIn ){
+                            $LinkLinkedIn = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Linkedin, 'PymeID' => $model->Id]);
+                            $LinkLinkedIn->Link = $socialModels->linkLinkedIn;
+                            $LinkLinkedIn->save();
+                        }
+
+                        // Youtube
+                        if( $socialModels->linkYoutube ){
+                            $LinkYoutube = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::YouTube, 'PymeID' => $model->Id]);
+                            $LinkYoutube->Link = $socialModels->linkYoutube;
+                            $LinkYoutube->save();
+                        }
+
+                        // Website
+                        if( $socialModels->linkWebsite ){
+                            $LinkWebsite = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::Website, 'PymeID' => $model->Id]);
+                            $LinkWebsite->Link = $socialModels->linkWebsite;
+                            $LinkWebsite->save();
+                        }
+
+                        // Correo Contacto
+                        if( $socialModels->correoContacto ){
+                            $LinkContacto = RedSocial::findOne(['TipoRedSocialID' => TipoRedSocialID::CorreoContacto, 'PymeID' => $model->Id]);
+                            $LinkContacto->Link = $socialModels->correoContacto;
+                            $LinkContacto->save();
+                        }
+
+                        return $this->redirect(['site/dashboard/', 'success'=> true]);
+                    } 
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+            'userModel' => $userModel,
+            'socialModels' => $socialModels,
+        ]);
     }
 
     /**

@@ -100,7 +100,7 @@ class Usuario extends \yii\db\ActiveRecord
         $isUnique = true;
         $dbUser = Usuario::findOne(['Usuario' => $this->Usuario, 'Clave' => $this->Clave]);
 
-        if($dbUser != NULL) {
+        if($dbUser != NULL && $dbUser->ID != $this->ID) {
             $dbPyme = Pyme::findOne(['UsuarioID' => $dbUser->ID, 'EstadoID' => $this->UsuarioEstadoId]);
             if($dbPyme != NULL) {
                 $isUnique = false;
