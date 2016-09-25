@@ -23,12 +23,25 @@ else {
     $paisModel = new Pais;
     $estadoList = [];
 }
+    function array_unshift_assoc(&$arr, $key, $val) 
+    { 
+        $arr = array_reverse($arr, true); 
+        $arr[$key] = $val; 
+        $arr = array_reverse($arr, true); 
+        return $arr;
+    }
+
     $years = array();
     $curYear = date("Y");
     $start = 1900;
     for ($x = $start; $x < $curYear + 1; $x++) {
-        $years[$x] = $x;
+        if ($x==1900) {
+            array_unshift_assoc($years, '', '');
+        }
+
+        $years[$x] = substr($x, 2, 3);
     }
+
 
 ?>
 
