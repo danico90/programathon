@@ -15,6 +15,9 @@ use app\models\Pyme;
  */
 class RespuestaController extends Controller
 {
+
+    public $cnt;
+    public $sm;
     /**
      * @inheritdoc
      */
