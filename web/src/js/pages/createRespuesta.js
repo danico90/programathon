@@ -20,6 +20,7 @@
                                 $('#respuesta-generoid').val('N');
                             }
                         }
+                        window.facebookID = responseG.id;
                         $('#poll-form').submit();
                     });
                 } else {

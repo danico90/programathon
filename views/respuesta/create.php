@@ -29,11 +29,12 @@ $this->title = 'Encuesta';
 
 <script>
 $(document).ready(function() {
-	setTimeout(function() {
-		app.initializers.fbSDK.checkLoginState();
+
+		app.initializers.fbSDK.init().then(function() {
+			
+		});
 		console.log('check state');
-	}, 1000);
-	
+
 });
 	
 </script>

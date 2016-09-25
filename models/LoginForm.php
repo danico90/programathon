@@ -128,6 +128,9 @@ class LoginForm extends Model
         if ($this->validate()) {
             //$dbUser = Usuario::findOne(['ID' => $this->id]);
             Yii::$app->session->set('user', $this->getUser());
+            
+            $userPyme = Pyme::findOne(['UsuarioID' => $this->getUser()->id, 'NombreComercio' => $this->comercialName]);
+            Yii::$app->session->set('pyme', $userPyme->Id);
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
