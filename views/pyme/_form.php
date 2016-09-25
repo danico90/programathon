@@ -126,6 +126,7 @@ else {
         <!-- Second Group of questions -->
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <h2>Redes Sociales</h2>
+            <hr>
         </div>
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?= $form->field($socialModels, 'linkFacebook')->textInput(['maxlength' => true]) ?>
@@ -140,6 +141,7 @@ else {
         <!-- Third Group of questions -->
          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <h2>Usuario</h2>
+            <hr>
         </div>
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
             <?php if($pymeIsNew) : ?>
