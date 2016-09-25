@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -130,6 +131,7 @@ else {
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <a class="verify-cancel btn btn-danger" data-message="¿Desea salir sin guardar los cambios?" href="<?= Url::toRoute(['site/login']);?>">Cancelar</a>
     </div>
 
     <?php ActiveForm::end(); ?>
