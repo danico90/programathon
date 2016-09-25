@@ -116,6 +116,7 @@ class PaisController extends Controller
                         ->where(['PaisID' => $id])
                         ->orderBy('Nombre')
                         ->all();
+            echo '<option selected></option>';
             foreach($states as $state){
                 
                 echo "<option value='".$state->Id."'>".$state->Nombre."</option>";
