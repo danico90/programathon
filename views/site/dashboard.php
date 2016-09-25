@@ -13,9 +13,8 @@ $edades = ['', '12-17', '18-33', '34-45', '46-55', '56-64', '65-73', '74+'];
 	<?php endif; ?>
 	<div class="row">
 		<div class="col-sm-12 company-info">
-			<?= '<img style="max-height: 100px;" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
-			<h2>Panel de Métricas – <?=$model->NombreComercio?> <span class="edit-button"><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span>Editar</a></span></h2>
-			<h3><?= Yii::$app->session->get('user')->username ?></h3>
+			<?= '<img class="logo" src="data:image/' . $model->ExtensionLogo . ';base64,' . base64_encode($model->Logo) . '"/>' ?>	
+			<h2>Panel de Métricas – <?=$model->NombreComercio?><a href="<?= Url::toRoute(['pyme/update', 'id' => $model->Id]);?>"><span class="glyphicon glyphicon-pencil"></span></a></h2>	
 		</div>
 	</div>
 	<div class="col-md-12">
