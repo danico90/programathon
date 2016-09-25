@@ -38,11 +38,11 @@ $model->PymeID = $pymeID;
     <?= $form->field($model, 'RangoEdad')->radioList($options6, ['class' => 'radio-group'])->label($label6) ?> 
 
     <?= $form->field($model, 'FechaRespuesta')->textInput(['value' => $date->format('Y-m-d H:i:sP') , 'class' => 'hidden']) ?>
-<div class="hidden">
+    <div class="hidden">
     <?= $form->field($model, 'GeneroID')->hiddenInput(['maxlength' => true, 'class' => 'hidden']) ?>
 
     <?= $form->field($model, 'PymeID')->hiddenInput(['class' => 'hidden']) ?>
-</div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-success" onclick="app.templates.createRespuesta.send()">Votar</button>
