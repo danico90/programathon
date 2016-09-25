@@ -10,8 +10,8 @@ use yii\widgets\ActiveForm;
 
 <div class="respuesta-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-    <?php  
+    <?php $form = ActiveForm::begin(['id' => 'poll-form']); ?>
+    <?php
         foreach($data as $question){
             echo '<div class="question-row row">';
             echo '<label class="col-sm-4 control-label required" for="respuesta-'.$question->id.'">'.$question->question.'</label>';
@@ -29,14 +29,14 @@ use yii\widgets\ActiveForm;
         } 
     ?>
 
-    <?= $form->field($model, 'FechaRespuesta')->textInput(['value' => date("F j, Y, g:i a"), 'class' => 'hidden']) ?>
+    <?= $form->field($model, 'FechaRespuesta')->textInput(['value' => $date->format('Y-m-d H:i:sP') , 'class' => 'hidden']) ?>
 
     <?= $form->field($model, 'GeneroID')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'PymeID')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-success' , 'name' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
