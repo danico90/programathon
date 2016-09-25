@@ -102,8 +102,8 @@ else {
     <!-- Third Group of questions -->
     <?= $form->field($userModel, 'NombreCompleto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'Usuario')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'Clave')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($userModel, 'RepetirClave')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($userModel, 'Clave')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($userModel, 'RepetirClave')->passwordInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'EmailContacto')->textInput(['maxlength' => true]) ?>
     <?= $form->field($userModel, 'RepetirEmailContacto')->textInput(['maxlength' => true]) ?>
 

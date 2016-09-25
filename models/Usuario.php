@@ -38,6 +38,7 @@ class Usuario extends \yii\db\ActiveRecord
             [['Usuario', 'NombreCompleto', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'required'],
             [['Usuario', 'Clave', 'EmailContacto', 'RepetirClave', 'RepetirEmailContacto'], 'string', 'max' => 50],
             [['NombreCompleto'], 'string', 'max' => 100],
+            [['RepetirClave'], 'validatePassword']
         ];
     }
 
@@ -64,8 +65,13 @@ class Usuario extends \yii\db\ActiveRecord
         return $this->hasMany(Pyme::className(), ['UsuarioID' => 'ID']);
     }
 
+    /**
+     * Validates the password. It shoud match when repeating the password.
+     */
     public function validatePassword($password)
     {
-        return $this->Clave === $password;
+        if($this->Clave != $password) {
+            $this->addError($password, 'Las claves no son iguales');
+        }
     }
 }
