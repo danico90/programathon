@@ -82,7 +82,7 @@ class SiteController extends BaseController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('/site/answersboard');
+            return $this->redirect('/site/dashboard');
         }
         return $this->render('login', [
             'model' => $model,
