@@ -22,7 +22,7 @@ $this->title = 'Login';
 <?php endif; ?>
    <?php $form = ActiveForm::begin([
        'id' => 'login-form',
-       'options' => ['class' => 'form-horizontal site-login login', 'name' => 'login-form'],
+       'options' => ['class' => 'form-horizontal site-login login wow fadeInUpBig', 'name' => 'login-form'],
        'fieldConfig' => [
            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
            'labelOptions' => ['class' => 'col-lg-1 control-label'],
@@ -70,3 +70,9 @@ $this->title = 'Login';
        </div> -->
 
    <?php ActiveForm::end(); ?>
+   
+   <script>
+        setTimeout(function() {
+            $(".login-page").css("overflow", "auto");
+        }, 3500);
+   </script>

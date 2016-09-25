@@ -1,0 +1,35 @@
+
+// Inputs
+.btn,
+select,
+textarea,
+.form-control,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+
+    box-shadow: none;
+    border-radius: 0;
+    
+    &:focus {
+        outline: 0 none;
+        box-shadow: none;
+    }
+
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
