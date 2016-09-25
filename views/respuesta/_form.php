@@ -52,3 +52,9 @@ $model->PymeID = $pymeID;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script>
+    $(document).on('ready', function() {
+        $('.wrap').addClass('respuesta-create-container');
+    });
+</script>
