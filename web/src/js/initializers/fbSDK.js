@@ -13,8 +13,6 @@
 			cookie     : true,
 			version    : 'v2.7'
 		});
-
-		//$('#loginbutton, #feedbutton').removeAttr('disabled');
 		
 		// Allow an status callback
 		FB.getLoginStatus(function(response) {
@@ -34,7 +32,7 @@
 
 		if (response.status === 'connected') {
 			// Logged into your app and Facebook.
-			//testAPI();
+			testAPI();
 		} else if (response.status === 'not_authorized') {
 			// The person is logged into Facebook, but not your app.
 			document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
